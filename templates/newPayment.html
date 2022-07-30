@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/css/foundation-float.min.css"
+			crossorigin="anonymous"
+		/>
+
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/css/foundation-prototype.min.css"
+			crossorigin="anonymous"
+		/>
+
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/css/foundation-rtl.min.css"
+			crossorigin="anonymous"
+		/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	</head>
+	<body>
+		<div class="row">
+			<form
+				action="/create/new/payment/{{invoice.billnumber}}/{{balance}}/{{paid}}/"
+				method="POST"
+				class="columns"
+				style="
+					display: flex;
+					flex-direction: column;
+					padding: 10px;
+					margin: 10px;
+					max-width: 300px;
+				"
+			>
+				{% csrf_token %}
+				<input
+					id="costumer_name"
+					type="text"
+					name="costumer_name"
+					value="{{invoice.costumer_name}}"
+					placeholder="Costumer Name"
+				/>
+				<input value="Paid: {{paid}}" type="text" />
+				<input
+					id="ammount"
+					type="text"
+					placeholder="Balance Ammount {{balance}}"
+					name="ammount"
+				/>
+				<input
+					id="refrence_number"
+					type="text"
+					placeholder="# Refrence Number / Transation ID (only for online transfers and NEFT transfers)"
+					name="refrence_number"
+				/>
+				<button
+					class="button"
+					data-tooltip
+					tabindex="1"
+					title="Click to Record Payment"
+				>
+					Record Payment
+				</button>
+			</form>
+			<div
+				class="columns"
+				style="margin: 10px; max-width: 500px; align-items: left"
+			>
+				<table>
+					<thead>
+						<tr>
+							<th style="text-align: left">Date</th>
+							<th style="text-align: left">Ammount</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for x in payment %}
+						<tr>
+							<td>{{x.date_created}}</td>
+							<td>{{x.ammount}}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>

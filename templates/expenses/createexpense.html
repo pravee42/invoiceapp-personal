@@ -1,0 +1,33 @@
+{% extends 'expenses/expenses.html' %} {% block contenta %}
+<div class="d-flex flex-row gap-2 align-content-center mt-4">
+	<form action="/expenses/" method="POST">
+		{% csrf_token %}
+		<table class="table table-borderless">
+			<tr>
+				<td class="text-danger">Date</td>
+				<td><input type="date" name="date" class="form-control" required></td>
+			</tr>
+            <tr>
+                <td class="text-danger">Expense Name</td>
+                <td><input type="text" name="expense_name" class="form-control" required></td>
+            </tr>
+            <tr>
+                <td class="text-danger">Ammount</td>
+                <td><input type="number" placeholder="1.0" step="1.0" min="0" name="ammount" max="1000000" class="form-control" required></td>
+            </tr>
+            <tr>
+                <td class="text-dark">Notes</td>
+                <td><textarea name="notes" rows="4" cols="50" class="form-control"></textarea></td>
+            </tr>
+            <tr>
+                <td class="text-danger">Costumer Name</td>
+                <td><input type="text" name="costumer_name" class="form-control" placeholder="Bill To (Optional)"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button type="submit" class="btn btn-primary">Submit</button></td>
+            </tr>
+		</table>
+	</form>
+</div>
+{% endblock %}

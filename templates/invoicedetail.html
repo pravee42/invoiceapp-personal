@@ -1,0 +1,84 @@
+<style>
+	.teal-button {
+		background-color: #00796b;
+		color: white;
+		border-radius: 5px;
+		border: none;
+		cursor: pointer;
+	}
+</style>
+
+{% extends 'base.html' %} {% block content %}
+<div class="d-flex p-3 flex-column flex-wrap gap-2 mt-3">
+	<div class="d-flex flex-row gap-3">
+		<p class="text-secondary h6">
+			Costumer Name: {{indata.costumer_name}} &nbsp;
+			<span class="badge p-1 bg-primary text-white"
+				>#0{{indata.billnumber}}</span
+			>
+		</p>
+	</div>
+	<table class="table table-bordered w-50">
+		<thead class="table-header bg-dark text-white table-striped">
+			<tr>
+				<th>Item</th>
+				<th>QTY</th>
+				<th>Price</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for bill in data %}
+			<tr>
+				<td>{{ bill.item }}</td>
+				<td>{{ bill.qty }}</td>
+				<td>{{ bill.price }}</td>
+				<td>
+					<a
+						href="/delete/item/{{bill.id}}/{{indata.billnumber}}/"
+						class="btn btn-danger"
+						>X</a
+					>
+				</td>
+			</tr>
+			{% endfor %}
+			<tr>
+				<td></td>
+				<td>Total</td>
+				<td>{{indata.totalammount}}</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>Discount</td>
+				<td class="text-success">{{indata.discount}}</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>Paid</td>
+				<td class="bg-primary text-white">{{indata.ammountpaid}}</td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="d-flex gap-2 flex-row">
+		<button
+			onclick="window.open('/print/{{indata.billnumber}}/', 'Abipravi Billing Softwares', 'width=1500,height=1000')"
+			class="btn btn-outline-primary" accesskey="p"
+			>Print</button
+		>
+		<button onclick="window.open('/payments/history/{{indata.billnumber}}/', 'Abipravi Billing Softwares', 'width=1500,height=1000')"
+			class="teal-button" accesskey="p">Payments</button>
+
+		{% if balance >= 5 %}
+		<button onclick="window.open('/payments/create/{{indata.billnumber}}/')" class="btn btn-primary">Make Payment</button>
+		{% endif %}
+
+		<a href="/delete/{{indata.billnumber}}" class="btn btn-danger">
+			Delete Invoice
+		</a>
+
+	</div>
+</div>
+{% endblock %}
