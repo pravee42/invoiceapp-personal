@@ -13,8 +13,8 @@
 	<div class="d-flex flex-row gap-3">
 		<p class="text-secondary h6">
 			Costumer Name: {{indata.costumer_name}} &nbsp;
-			<span class="badge p-1 bg-primary text-white"
-				>#0{{indata.billnumber}}</span
+			<span class="badge text-bg-primary text-white"
+				>{{indata.billnumber}}</span
 			>
 		</p>
 	</div>
@@ -68,7 +68,7 @@
 			class="btn btn-outline-primary" accesskey="p"
 			>Print</button
 		>
-		<button onclick="window.open('/payments/history/{{indata.billnumber}}/', 'Abipravi Billing Softwares', 'width=1500,height=1000')"
+		<button onclick="window.open('/payments/history/{{indata.billnumber}}/', 'Abipravi Billing Softwares', 'width=max,height=max')"
 			class="teal-button" accesskey="p">Payments</button>
 
 		{% if balance >= 5 %}

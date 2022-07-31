@@ -26,10 +26,10 @@
 						{{bills.billnumber}}</a
 					>
 				</td>
-				{% if bills.costumer_name|length > 1 %}
+				{% if bills.costumer_name|length > 2 %}
 				<td>{{bills.costumer_name}}</td>
 				{% else %}
-				<td>Cash On Sale</td>
+				<td class="text-danger">POS</td>
 				{% endif %}
 				<td>{{bills.ammountpaid}}</td>
 				<td>{{bills.balance}}</td>

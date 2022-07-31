@@ -37,9 +37,9 @@
 		<script src="{% static 'css/stylesheet.css' %}"></script>
 	</head>
 	<body style="height: 100vh">
-		<nav class="navbar navbar-expand-lg position-sticky top-0" style="background-color:#21263C">
+		<nav class="navbar navbar-expand-lg position-sticky top-0" style="background-color:#21263C; color: #BBD0DF">
 			<div class="container-fluid">
-				<a class="navbar-brand text-white" href="#">Invoice Billing</a>
+				<a class="navbar-brand text-white" href="#">Rukshana Computers</a>
 				<button
 					class="navbar-toggler"
 					type="button"
@@ -53,13 +53,13 @@
 				</button>
 				<div class="collapse navbar-collapse text-white" id="navbarNavAltMarkup">
 					<div class="navbar-nav">
-						<a class="nav-link text-white active" href="/">Home</a>
-						<a class="nav-link text-white" href="/create/">Create Invoice</a>
-						<a class="nav-link text-white" href="/create/product/view/">Products</a>
-						<a class="nav-link text-white" href="/reports/view/">Reports</a>
-						<a class="nav-link text-white" href="/costumers/view/">Costumers</a>
-						<a class="nav-link text-white" href="/expenses" onmouseover="show_menu_expenses()">Expenses</a>
-						<a class="nav-link text-white" href="/admin">Admin Panel</a>
+						<a class="nav-link text-white active" href="/"><i class="bi bi-columns-gap"></i> Home</a>
+						<a class="nav-link text-white" accesskey="c"  href="/create/"><i class="bi bi-receipt"></i> Create Invoice</a>
+						<a class="nav-link text-white" accesskey="q" href="/create/product/view/"><i class="bi bi-diagram-2"></i> Products</a>
+						<a class="nav-link text-white" accesskey="Z" href="/reports/view/"><i class="bi bi-card-checklist"></i> Reports</a>
+						<a class="nav-link text-white" accesskey="s" href="/costumers/view/"><i class="bi bi-person-video2"></i> Costumers</a>
+						<a class="nav-link text-white" href="/expenses" accesskey="e" onmouseover="show_menu_expenses()"><i class="bi bi-arrows-angle-expand"></i> Expenses</a>
+						<a class="nav-link text-white" href="/admin"><i class="bi bi-person-circle"></i> Admin Panel</a>
 					</div>
 				</div>
 			</div>

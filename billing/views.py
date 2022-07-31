@@ -426,31 +426,21 @@ def chartData(request):
     sale = Invoice.objects.all().values('ammountpaid')
     sale_dates = (Invoice.objects
                   .values('date')
-                  .annotate(ammount=Sum('ammountpaid'))
-                  .order_by())
+                  .annotate(ammount=Sum('ammountpaid')).order_by('date'))
+    return Response(sale_dates)
+
+def chart(request):
+    expense = Expenses.objects.all().values('ammount')
+    sale = Invoice.objects.all().values('totalammount')
     sum_paid = 0
     for m in expense:
         sum_paid += int(m["ammount"])
-
     sum_sale = 0
     for m in sale:
-        sum_paid += int(m["ammountpaid"])
-
-    return render(request, 'dashboard.html')
-
-def chart(request):
-    # expense = Expenses.objects.all().values('ammount')
-    # sale = Invoice.objects.all().values('ammountpaid')
-    # sale_dates = (Invoice.objects
-    # .values('date')
-    # .annotate(ammount=Sum('ammountpaid'))
-    # .order_by())
-    # sum_paid = 0
-    # for m in expense:
-    #     sum_paid += int(m["ammount"])
-    
-    # sum_sale = 0
-    # for m in sale:
-    #     sum_paid += int(m["ammountpaid"])
-        
-    return render(request, 'dashboard.html')
+        sum_sale += int(m["totalammount"])
+    payments = Payments.objects.all().values('ammount')
+    sum_payments = 0
+    for m in payments:
+        sum_payments += int(m["ammount"])
+    invoices = Invoice.objects.all().order_by('-id')[:5]
+    return render(request, 'dashboard.html', {'expense': sum_paid, 'sale': sum_sale, 'payments': sum_payments, 'invoices': invoices})

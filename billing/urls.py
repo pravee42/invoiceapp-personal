@@ -4,7 +4,8 @@ from billingsoftware.settings import DEBUG, STATIC_URL, STATIC_ROOT, MEDIA_URL, 
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.chart, name='chart'),
+    path('viewinvoices/', views.index, name='index'),
     path('detail/<str:id>/', views.viewInvoice, name='viewInvoice'),
     path('create/', views.createInvoice, name='viewInvoice'),
     path('createinvoice/<str:uid>/', views.createInvoicefucntion,
