@@ -6,6 +6,7 @@
 <html lang="en">
 	{% load pwa %} {% progressive_web_app_meta %}
 	<head>
+		<link rel="shortcut icon" href="{% static 'images/logo112.ico' %}" type="image/x-icon">	
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
 			rel="stylesheet"
@@ -57,7 +58,7 @@
 						<a class="nav-link text-white" accesskey="q" href="/create/product/view/"><i class="bi bi-diagram-2"></i> Products</a>
 						<a class="nav-link text-white" accesskey="Z" href="/reports/view/"><i class="bi bi-card-checklist"></i> Reports</a>
 						<a class="nav-link text-white" accesskey="s" href="/costumers/view/"><i class="bi bi-person-video2"></i> Costumers</a>
-						<a class="nav-link text-white" href="/expenses" accesskey="e" onmouseover="show_menu_expenses()"><i class="bi bi-arrows-angle-expand"></i> Expenses</a>
+						<a class="nav-link text-white" href="/expenses/dashboard/" accesskey="e" onmouseover="show_menu_expenses()"><i class="bi bi-arrows-angle-expand"></i> Expenses</a>
 						<a class="nav-link text-white" href="/admin"><i class="bi bi-person-circle"></i> Admin Panel</a>
 					</div>
 				</div>

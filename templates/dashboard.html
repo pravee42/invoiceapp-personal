@@ -1,8 +1,9 @@
-{% load static %} {% static "js" as baseUrl %} {% static "css" as baseUrl %}
+{% load static %} {% static "js" as baseUrl %} {% static "css" as baseUrl %} {% static "images" as baseUrl %}
 <!DOCTYPE html>
 
 <html lang="en">
 	<head>
+		<link rel="shortcut icon" href="{% static 'images/logo112.ico' %}" type="image/x-icon">
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
 			rel="stylesheet"

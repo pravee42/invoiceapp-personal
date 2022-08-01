@@ -423,10 +423,10 @@ def createexpenses(request):
 @api_view(['GET'])
 def chartData(request):
     expense = Expenses.objects.all().values('ammount')
-    sale = Invoice.objects.all().values('ammountpaid')
+    sale = Invoice.objects.all().values('totalammount')
     sale_dates = (Invoice.objects
                   .values('date')
-                  .annotate(ammount=Sum('ammountpaid')).order_by('date'))
+                  .annotate(ammount=Sum('totalammount')).order_by('date'))
     return Response(sale_dates)
 
 def chart(request):
