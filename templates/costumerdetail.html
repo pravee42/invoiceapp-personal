@@ -27,7 +27,9 @@
         <tbody>
             {% for item in data1 %}
             <tr>
-                <td>{{item.billnumber}}</td>
+                <td>
+                    <a class="nav-link text-primary" href="/detail/{{item.billnumber}}">{{item.billnumber}}</a>
+                </td>
                 <td>{{item.ammountpaid}}</td>
             </tr>
             {% endfor %}
