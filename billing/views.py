@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Invoice, InvoiceBills, Products, Payments, Costumersmodel, Test, Expenses
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 import secrets
 from django.db.models import Case, Value, When, Count, Sum
 from .forms import CreateInvoice
@@ -444,3 +444,16 @@ def chart(request):
         sum_payments += int(m["ammount"])
     invoices = Invoice.objects.all().order_by('-id')[:5]
     return render(request, 'dashboard.html', {'expense': sum_paid, 'sale': sum_sale, 'payments': sum_payments, 'invoices': invoices})
+
+
+@api_view(['GET'])
+def apiChartExpense(request):
+    sale_dates = (Expenses.objects
+                  .values('date')
+                  .annotate(ammount=Sum('ammount')).order_by('date'))
+    return Response(sale_dates)
+
+def search_products(request, stra):
+    products = Products.objects.filter(product_name__icontains=stra).values(
+        'product_name', 'product_price', 'gst')
+    return JsonResponse(list(products), safe=False)

@@ -41,13 +41,15 @@
 					name="costumer_name"
 					value="{{invoice.costumer_name}}"
 					placeholder="Costumer Name"
+					readonly
 				/>
-				<input value="Paid: {{paid}}" type="text" />
+				<input value="Paid: {{paid}}" type="text" readonly />
 				<input
 					id="ammount"
 					type="text"
 					placeholder="Balance Ammount {{balance}}"
 					name="ammount"
+					required
 				/>
 				<input
 					id="refrence_number"

@@ -62,7 +62,7 @@
 					<a class="nav-link text-white" href="/create/product/view/"><i class="bi bi-diagram-2"></i> Products</a>
 					<a class="nav-link text-white" href="/reports/view/"><i class="bi bi-card-checklist"></i> Reports</a>
 					<a class="nav-link text-white" href="/costumers/view/"><i class="bi bi-person-video2"></i> Costumers</a>
-					<a class="nav-link text-white" href="/expenses" onmouseover="show_menu_expenses()"><i
+					<a class="nav-link text-white" href="/expenses/dashboard/" onmouseover="show_menu_expenses()"><i
 							class="bi bi-arrows-angle-expand"></i> Expenses</a>
 					<a class="nav-link text-white" href="/admin"><i class="bi bi-person-circle"></i> Admin Panel</a>
 					</div>
@@ -75,15 +75,15 @@
             <canvas id="myChart"></canvas>
            </div>
            <div class="d-flex flex-column gap-2 align-items-center">
-            <div accesskey="f" onclick="window.location.href='/viewinvoices/'" class="rounded border border-light p-3 d-flex flex-column align-items-end" style="width: 200px">
+            <div accesskey="f" onclick="window.location.href='/viewinvoices/'" class="rounded border border-primary border-opacity-50 p-3 d-flex flex-column align-items-end" style="width: 200px">
                 <span class="text-primary">Total Sales</span>
                 <span class="h5 text-dark">₹{{sale}}</span>
             </div>
-            <div class="rounded border border-light p-3 d-flex flex-column align-items-end" style="width: 200px">
+            <div class="rounded border border-primary border-opacity-50 p-3 d-flex flex-column align-items-end" style="width: 200px">
                 <span class="text-success">Total Receipts</span>
                 <span class="h5 text-dark">₹{{payments}}</span>
             </div>
-            <div class="rounded border border-light p-3 d-flex flex-column align-items-end" style="width: 200px">
+            <div class="rounded border border-primary border-opacity-50 p-3 d-flex flex-column align-items-end" style="width: 200px">
                 <span class=" text-danger">Total Expenses</span>
                 <span class="h5 text-dark">₹{{expense}}</span>
             </div>
@@ -116,6 +116,13 @@
 				</tbody>
 			</table>
 		</div>
+		<div class="d-flex flex-column gap-3 align-items-center justify-content-center m-2 ">
+			<p class="h5 text-primary mt-4">Expense Reports</p>
+			<div style="width: 700px;">
+				<canvas id="myexpensechart"></canvas>
+			</div>
+		</div>
+		
 	</body>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.2/chart.min.js"
@@ -128,6 +135,18 @@
 			var sale_data = [];
 			var sale_price = [];
 			const response = await fetch('/api/chart/');
+			const data = await response.json();
+			for (let i = 0; i < data.length; i++) {
+				await sale_data.push(data[i].date);
+				await sale_price.push(data[i].ammount);
+			}
+
+			return [sale_data, sale_price];
+		}
+		async function getExpenseData() {
+			var sale_data = [];
+			var sale_price = [];
+			const response = await fetch('/api/chart/expense/');
 			const data = await response.json();
 			for (let i = 0; i < data.length; i++) {
 				await sale_data.push(data[i].date);
@@ -187,6 +206,56 @@
 				},
 			});
 		});
+		getExpenseData().then(function (aa) {
+				var ctx = document.getElementById('myexpensechart').getContext('2d');
+				var myChart = new Chart(ctx, {
+					type: 'line',
+					data: {
+						labels: aa[0],
+						datasets: [
+							{
+								label: 'Sales',
+								data: aa[1],
+								backgroundColor: [
+									'rgba(153, 102, 255, 0.2)',
+									'rgba(255, 159, 64, 0.2)',
+									'rgba(75, 192, 192, 0.2)',
+									'rgba(255, 99, 132, 0.2)',
+									'rgba(54, 162, 235, 0.2)',
+									'rgba(255, 206, 86, 0.2)',
+								],
+								borderColor: [
+									'rgba(153, 102, 255, 1)',
+									'rgba(255, 159, 64, 1)',
+									'rgba(75, 192, 192, 1)',
+									'rgba(255, 99, 132, 1)',
+									'rgba(54, 162, 235, 1)',
+									'rgba(255, 206, 86, 1)',
+								],
+								borderWidth: 1,
+								tension: 1,
+								rotation: 3,
+							},
+						],
+					},
+					options: {
+						animations: {
+							tension: {
+								duration: 5000,
+								easing: 'easeInQuad',
+								from: 1,
+								to: 0,
+								loop: true
+							}
+						},
+						scales: {
+							y: {
+								beginAtZero: true,
+							},
+						},
+					},
+				});
+			});
 		// const ctx = document.getElementById('myChart');
 		//     const myChart = new Chart(ctx, {
 		//         type: 'bar',

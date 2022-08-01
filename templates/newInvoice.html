@@ -13,6 +13,9 @@
 		<h5 class="offcanvas-title" id="staticBackdropLabel">
 			Products &nbsp; 
 		</h5>
+		<div class="form-group">
+			<input type="text" class="form-control" name="search" placeholder="Search" id="search_products_field" onkeyup="callSearchfunction()" />
+		</div>
 		<button
 			type="button"
 			class="btn-close"
@@ -21,7 +24,7 @@
 		></button>
 	</div>
 	<div class="offcanvas-body">
-		<div class="p-1">
+		<div class="p-1"  id="app_table">
 			<table class="table table-bordered table-striped table-hover">
 				<thead class="table-dark">
 					<tr>
@@ -30,7 +33,7 @@
 						<td>Select</td>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody >
 					{% for product in products %}
 					<tr>
 						<td>{{product.product_name}}</td>
@@ -48,6 +51,24 @@
 						</td>
 					</tr>
 					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div id="search_table" class="p-1" style="display: none">
+			<table class="table table-bordered table-striped table-hover">
+				<thead class="table-dark">
+					<tr>
+						<td>Product Name</td>
+						<td>Price</td>
+						<td>Select</td>
+					</tr>
+				</thead>
+				<tbody id="search_table_tbody">
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
 				</tbody>
 			</table>
 		</div>

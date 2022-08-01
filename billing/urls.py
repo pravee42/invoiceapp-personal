@@ -33,5 +33,7 @@ urlpatterns = [
     path('expenses/create/', views.createexpenses),
     path('chart/', views.chart),
     path('api/chart/', views.chartData),
+    path('api/chart/expense/', views.apiChartExpense),
+    path('api/products/<str:stra>/', views.search_products),
 #     path('test/', views.WorkTest),
 ]

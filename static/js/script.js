@@ -63,3 +63,53 @@ function totalammountff() {
 // function show_menu_expenses() {
 // 	document.getElementById('menu_expenses').style.display = 'block';
 // }
+// function x() {
+// 	let e = window.event;
+// 	let keycode = e.keyCode;
+// 	if (keycode == 17) {
+// 		document.getElementById('products_model').style.display = 'block';
+// 	}
+// };
+
+function callSearchfunction() {
+	const searchField = document.querySelector('#search_products_field').value;
+	if (window.event.keyCode == 13) {
+		document.getElementById('search_table_tbody').innerHTML = ""
+		if (searchField.trim().length > 1) {
+			fetch(`/api/products/${searchField}/`)
+				.then((res) => res.json())
+				.then((data) => {
+					if (data.length > 0) {
+						document.getElementById('app_table').style.display = 'none';
+						document.getElementById('search_table').style.display = '';
+						data.forEach((product) => {
+							document.getElementById('search_table_tbody').innerHTML += `
+						<tr>
+							<td>${product.product_name}</td>
+							<td>${product.product_price}.00</td>
+							<td>
+								<button
+								class="btn btn-outline-primary"
+								id="${product.product_name} + ${product.product_price} + ${product.gst}"
+								onclick="setfields(id)"
+								data-bs-dismiss="offcanvas"
+								aria-label="Close"
+							>
+								<i class="bi bi-check-all"></i>
+							</button>
+							</td>
+						</tr>
+					`;
+							console.log(product.product_name);
+						});
+					} else {
+						document.getElementById('search_table').style.display = 'none';
+						document.getElementById('app_table').style.display = 'block';
+					}
+				});
+		} else {
+			document.getElementById('app_table').style.display = 'block';
+			document.getElementById('search_table').style.display = 'none';
+		}
+	}
+}
