@@ -1,38 +1,23 @@
-{% load static %} {% static "js" as baseUrl %} {% static "css" as baseUrl %} {% static "images" as baseUrl %}
+{% load static %} {% static "js" as baseUrl %} {% static "css" as baseUrl %} {%
+static "images" as baseUrl %}{% static "icons" as baseUrl %}
 <!DOCTYPE html>
 
 <html lang="en">
 	<head>
-		<link rel="shortcut icon" href="{% static 'images/logo112.ico' %}" type="image/x-icon">
 		<link
-			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-			rel="stylesheet"
-			integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-			crossorigin="anonymous"
+			rel="shortcut icon"
+			href="{% static 'images/logo112.ico' %}"
+			type="image/x-icon"
 		/>
+		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+		<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-			integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+			src="{% static 'js/bootstrap.min.js' %}"
 			crossorigin="anonymous"
 		></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
-			integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
-			crossorigin="anonymous"
-		></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
-			integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
-			crossorigin="anonymous"
-		></script>
-		<title>Invoice Application - Dashboard</title>
-
-		<link
-			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css"
-		/>
-
-		<script src="{% static 'css/stylesheet.css' %}"></script>
+		<title>Rukshana Computers - Dashboard</title>
+		<link rel="stylesheet" href="{% static 'icons/bootstrap-icons.css' %}" />
+		<link href="{% static 'css/stylesheet.css' %}" />
 	</head>
 
 	<body style="height: 100vh">
@@ -58,41 +43,77 @@
 					id="navbarNavAltMarkup"
 				>
 					<div class="navbar-nav">
-					<a class="nav-link text-white active"  href="/"><i class="bi bi-columns-gap"></i> Home</a>
-					<a class="nav-link text-white" accesskey="c" href="/create/"><i class="bi bi-receipt"></i> Create Invoice</a>
-					<a class="nav-link text-white" href="/create/product/view/"><i class="bi bi-diagram-2"></i> Products</a>
-					<a class="nav-link text-white" href="/reports/view/"><i class="bi bi-card-checklist"></i> Reports</a>
-					<a class="nav-link text-white" href="/costumers/view/"><i class="bi bi-person-video2"></i> Costumers</a>
-					<a class="nav-link text-white" href="/expenses/dashboard/" onmouseover="show_menu_expenses()"><i
-							class="bi bi-arrows-angle-expand"></i> Expenses</a>
-					<a class="nav-link text-white" href="/admin"><i class="bi bi-person-circle"></i> Admin Panel</a>
+						<a class="nav-link text-white active" href="/"
+							><i class="bi bi-columns-gap"></i> Home</a
+						>
+						<a class="nav-link text-white" accesskey="c" href="/create/"
+							><i class="bi bi-receipt"></i> Create Invoice</a
+						>
+						<a class="nav-link text-white" href="/create/product/view/"
+							><i class="bi bi-diagram-2"></i> Products</a
+						>
+						<a class="nav-link text-white" href="/reports/view/"
+							><i class="bi bi-card-checklist"></i> Reports</a
+						>
+						<a class="nav-link text-white" href="/costumers/view/"
+							><i class="bi bi-person-video2"></i> Costumers</a
+						>
+						<a
+							class="nav-link text-white"
+							href="/expenses/dashboard/"
+							onmouseover="show_menu_expenses()"
+							><i class="bi bi-arrows-angle-expand"></i> Expenses</a
+						>
+						<a class="nav-link text-white" href="/admin"
+							><i class="bi bi-person-circle"></i> Admin Panel</a
+						>
 					</div>
 				</div>
 			</div>
 		</nav>
-		<div class="d-flex flex-row gap-3 align-items-center justify-content-center m-2">
-           <div class="d-flex flex-column gap-2 align-items-start " style="width: 700px">
-            <p class="h5 text-primary mt-4">Sales Reports</p>
-            <canvas id="myChart"></canvas>
-           </div>
-           <div class="d-flex flex-column gap-2 align-items-center">
-            <div accesskey="f" onclick="window.location.href='/viewinvoices/'" class="rounded border border-primary border-opacity-50 p-3 d-flex flex-column align-items-end" style="width: 200px">
-                <span class="text-primary">Total Sales</span>
-                <span class="h5 text-dark">₹{{sale}}</span>
-            </div>
-            <div class="rounded border border-primary border-opacity-50 p-3 d-flex flex-column align-items-end" style="width: 200px">
-                <span class="text-success">Total Receipts</span>
-                <span class="h5 text-dark">₹{{payments}}</span>
-            </div>
-            <div class="rounded border border-primary border-opacity-50 p-3 d-flex flex-column align-items-end" style="width: 200px">
-                <span class=" text-danger">Total Expenses</span>
-                <span class="h5 text-dark">₹{{expense}}</span>
-            </div>
-           </div>
-        </div>
-		<div class="d-flex flex-column gap-3 align-items-center justify-content-center m-2">
+		<div
+			class="d-flex flex-row gap-3 align-items-center justify-content-center m-2"
+		>
+			<div
+				class="d-flex flex-column gap-2 align-items-start"
+				style="width: 700px"
+			>
+				<p class="h5 text-primary mt-4">Sales Reports</p>
+				<canvas id="myChart"></canvas>
+			</div>
+			<div class="d-flex flex-column gap-2 align-items-center">
+				<div
+					accesskey="f"
+					onclick="window.location.href='/viewinvoices/'"
+					class="rounded border border-primary border-opacity-50 p-3 d-flex flex-column align-items-end"
+					style="width: 200px"
+				>
+					<span class="text-primary">Total Sales</span>
+					<span class="h5 text-dark">₹{{sale}}</span>
+				</div>
+				<div
+					class="rounded border border-primary border-opacity-50 p-3 d-flex flex-column align-items-end"
+					style="width: 200px"
+				>
+					<span class="text-success">Total Receipts</span>
+					<span class="h5 text-dark">₹{{payments}}</span>
+				</div>
+				<div
+					class="rounded border border-primary border-opacity-50 p-3 d-flex flex-column align-items-end"
+					style="width: 200px"
+				>
+					<span class="text-danger">Total Expenses</span>
+					<span class="h5 text-dark">₹{{expense}}</span>
+				</div>
+			</div>
+		</div>
+		<div
+			class="d-flex flex-column gap-3 align-items-center justify-content-center m-2"
+		>
 			<p class="h5 text-dark mt-4">Recent Invoices</p>
-			<table class="table table-responsive-sm w-50 table-bordered table-striped table-hover shadow-sm">
+			<table
+				class="table table-responsive-sm w-50 table-bordered table-striped table-hover shadow-sm"
+			>
 				<thead>
 					<tr>
 						<th>Invoice ID</th>
@@ -102,28 +123,31 @@
 				</thead>
 				<tbody>
 					{% for data in invoices %}
-						<tr>
-							<td>
-								<a class="nav-link text-dark" href="/detail/{{data.billnumber}}/">{{data.billnumber}}</a>
-							</td>
-							{% if data.costumer_name|length > 1 %}
-							<td>{{data.costumer_name}}</td>
-							{% else %}
-							<td class="text-danger">POS</td>
-							{% endif %}
-							<td>{{data.totalammount}}</td>
-						</tr>
+					<tr>
+						<td>
+							<a class="nav-link text-dark" href="/detail/{{data.billnumber}}/"
+								>{{data.billnumber}}</a
+							>
+						</td>
+						{% if data.costumer_name|length > 1 %}
+						<td>{{data.costumer_name}}</td>
+						{% else %}
+						<td class="text-danger">POS</td>
+						{% endif %}
+						<td>{{data.totalammount}}</td>
+					</tr>
 					{% endfor %}
 				</tbody>
 			</table>
 		</div>
-		<div class="d-flex flex-column gap-3 align-items-center justify-content-center m-2 ">
+		<div
+			class="d-flex flex-column gap-3 align-items-center justify-content-center m-2"
+		>
 			<p class="h5 text-primary mt-4">Expense Reports</p>
-			<div style="width: 700px;">
+			<div style="width: 700px">
 				<canvas id="myexpensechart"></canvas>
 			</div>
 		</div>
-		
 	</body>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.2/chart.min.js"
@@ -196,8 +220,8 @@
 							easing: 'easeInQuad',
 							from: 1,
 							to: 0,
-							loop: true
-						}
+							loop: true,
+						},
 					},
 					scales: {
 						y: {
@@ -208,55 +232,55 @@
 			});
 		});
 		getExpenseData().then(function (aa) {
-				var ctx = document.getElementById('myexpensechart').getContext('2d');
-				var myChart = new Chart(ctx, {
-					type: 'line',
-					data: {
-						labels: aa[0],
-						datasets: [
-							{
-								label: 'Sales',
-								data: aa[1],
-								backgroundColor: [
-									'rgba(153, 102, 255, 0.2)',
-									'rgba(255, 159, 64, 0.2)',
-									'rgba(75, 192, 192, 0.2)',
-									'rgba(255, 99, 132, 0.2)',
-									'rgba(54, 162, 235, 0.2)',
-									'rgba(255, 206, 86, 0.2)',
-								],
-								borderColor: [
-									'rgba(153, 102, 255, 1)',
-									'rgba(255, 159, 64, 1)',
-									'rgba(75, 192, 192, 1)',
-									'rgba(255, 99, 132, 1)',
-									'rgba(54, 162, 235, 1)',
-									'rgba(255, 206, 86, 1)',
-								],
-								borderWidth: 1,
-								tension: 1,
-								rotation: 3,
-							},
-						],
-					},
-					options: {
-						animations: {
-							tension: {
-								duration: 5000,
-								easing: 'easeInQuad',
-								from: 1,
-								to: 0,
-								loop: true
-							}
+			var ctx = document.getElementById('myexpensechart').getContext('2d');
+			var myChart = new Chart(ctx, {
+				type: 'line',
+				data: {
+					labels: aa[0],
+					datasets: [
+						{
+							label: 'Sales',
+							data: aa[1],
+							backgroundColor: [
+								'rgba(153, 102, 255, 0.2)',
+								'rgba(255, 159, 64, 0.2)',
+								'rgba(75, 192, 192, 0.2)',
+								'rgba(255, 99, 132, 0.2)',
+								'rgba(54, 162, 235, 0.2)',
+								'rgba(255, 206, 86, 0.2)',
+							],
+							borderColor: [
+								'rgba(153, 102, 255, 1)',
+								'rgba(255, 159, 64, 1)',
+								'rgba(75, 192, 192, 1)',
+								'rgba(255, 99, 132, 1)',
+								'rgba(54, 162, 235, 1)',
+								'rgba(255, 206, 86, 1)',
+							],
+							borderWidth: 1,
+							tension: 1,
+							rotation: 3,
 						},
-						scales: {
-							y: {
-								beginAtZero: true,
-							},
+					],
+				},
+				options: {
+					animations: {
+						tension: {
+							duration: 5000,
+							easing: 'easeInQuad',
+							from: 1,
+							to: 0,
+							loop: true,
 						},
 					},
-				});
+					scales: {
+						y: {
+							beginAtZero: true,
+						},
+					},
+				},
 			});
+		});
 		// const ctx = document.getElementById('myChart');
 		//     const myChart = new Chart(ctx, {
 		//         type: 'bar',
