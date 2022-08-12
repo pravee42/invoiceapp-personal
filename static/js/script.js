@@ -1,4 +1,4 @@
-// document.getElementById('productfield').focus();
+document.getElementById('productfield').focus();
 document.getElementById('costumer_name_field').focus();
 
 // function nameFunction() {
