@@ -2,8 +2,13 @@
 <div class="d-flex p-3 flex-column flex-wrap gap-2 mt-3">
 	<form action="/searchinvoice/" method="POST">
 		{% csrf_token %}
-		<input type="text" class="p-1 bg-info bg-opacity-10 border border-info border-start-0 border-end-0" name="invoiceid" placeholder="Search Invoice using Invoice Number"/>
-		<input type="submit" class="btn btn-outline-primary " value="Search">
+		<input
+			type="text"
+			class="p-1 bg-info bg-opacity-10 border border-info border-start-0 border-end-0"
+			name="invoiceid"
+			placeholder="Search Invoice using Invoice Number"
+		/>
+		<input type="submit" class="btn btn-outline-primary" value="Search" />
 	</form>
 	<table class="table-sm table-bordered table-responsive-sm shadow-sm">
 		<thead class="bg-dark">
@@ -40,14 +45,20 @@
 	</table>
 </div>
 <div
-	style="position: sticky; bottom: 0; left: 0; right: 0; background-color: #21263C"
+	style="
+		position: sticky;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-color: #21263c;
+	"
 	class="p-2 shadow-sm d-flex flex-row gap-4"
 >
-	<p class="text-white rounded p-2 bg-danger h5">
+	<p class="text-white rounded p-1 bg-danger">
 		Total Sale: &#8377; {{ totalammount }}
 	</p>
-	<p class="text-white h5 p-2">Total Paid: &#8377; {{ paid }}</p>
-	<p class="text-success bg-white rounded h5 p-2">
+	<p class="text-white p-1">Total Paid: &#8377; {{ paid }}</p>
+	<p class="text-success bg-white rounded p-1">
 		Ammount Pending: &#8377; {{ overall }}
 	</p>
 </div>

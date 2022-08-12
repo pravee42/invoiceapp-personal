@@ -1,9 +1,15 @@
 altgraph==0.17.2
 asgiref==3.5.2
+dj-database-url==1.0.0
 Django==4.0.6
+django-progressive-web-app==0.1.1
+django-pwa==1.0.10
 djangorestframework==3.13.1
+docopt==0.6.2
 environ==1.0
 future==0.18.2
+gunicorn==20.1.0
+num2words==0.5.10
 pefile==2022.5.30
 psycopg2==2.9.3
 pyinstaller==5.2
@@ -12,3 +18,4 @@ pytz==2022.1
 pywin32-ctypes==0.2.0
 sqlparse==0.4.2
 tzdata==2022.1
+whitenoise==6.2.0

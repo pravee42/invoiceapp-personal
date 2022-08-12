@@ -1,0 +1,1 @@
+web: gunicorn billingsoftware.wsgi --log-file -
