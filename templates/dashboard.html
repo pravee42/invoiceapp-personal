@@ -236,7 +236,7 @@
 		getExpenseData().then(function (aa) {
 			var ctx = document.getElementById('myexpensechart').getContext('2d');
 			var myChart = new Chart(ctx, {
-				type: 'line',
+				type: 'bar',
 				data: {
 					labels: aa[0],
 					datasets: [
