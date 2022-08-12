@@ -5,6 +5,7 @@
     <title>Payments - {{indata.billnumber}} from ABIPRAVI BILLING</title>
 
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="{% static 'images/logo112.ico' %}" type="image/x-icon">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
@@ -22,7 +23,7 @@
         <head>
 
         <body>
-           <div class="d-flex flex-row gap-3 p-4 w-100 justify-content-evenly">
+           <div class="d-flex flex-row gap-3 p-4 w-100 justify-content-evenly flex-wrap">
             <div>
                 {% if bills.costumer_name|length > 1 %}
                 <p class="h6 text-dark">Custumer Name: {{ data.costumer_name}}</p>

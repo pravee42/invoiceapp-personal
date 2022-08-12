@@ -39,13 +39,13 @@
 	</div>
 </div>
 <form
-	class="p-3 d-flex flex-row gap-4 w-100 justify-content-evenly"
+	class="p-3 d-flex flex-row gap-4 w-100 justify-content-evenly flex-wrap"
 	action="/save/{{uid}}/{{total}}/0/"
 	id="sendinvoiceform"
 	method="POST"
 >
 	{% csrf_token %}
-	<div class="d-flex flex-column gap-3 w-25 mb-3">
+	<div class="d-flex flex-column gap-3  mb-3">
 		<div class="d-flex flex-column">
 			<span class="p-1">Costumer Name</span>
 			<input

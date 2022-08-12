@@ -38,19 +38,22 @@ def index(request):
 
 
 def viewInvoice(request, id):
-    invoice = InvoiceBills.objects.filter(invoice=id)
-    invoices = Invoice.objects.get(billnumber=id)
-    balance = 0
-    total_paid = Payments.objects.filter(invoice=id).values("ammount")
-    sum_paid = 0
-    for m in total_paid:
-        sum_paid += int(m["ammount"])
-    balance = int(invoices.totalammount) - int(sum_paid)
-    return render(
-        request,
-        "invoicedetail.html",
-        {"data": invoice, "indata": invoices, "balance": int(balance)},
-    )
+    try:
+        invoice = InvoiceBills.objects.filter(invoice=id)
+        invoices = Invoice.objects.get(billnumber=id)
+        balance = 0
+        total_paid = Payments.objects.filter(invoice=id).values("ammount")
+        sum_paid = 0
+        for m in total_paid:
+            sum_paid += int(m["ammount"])
+        balance = int(invoices.totalammount) - int(sum_paid)
+        return render(
+            request,
+            "invoicedetail.html",
+            {"data": invoice, "indata": invoices, "balance": int(balance)},
+        )
+    except Invoice.DoesNotExist:
+        return render(request, "errorpages/norecord.html", {'title': 'Invoice Not found'} ,status=status.HTTP_404_NOT_FOUND)
 
 
 def createInvoice(request):

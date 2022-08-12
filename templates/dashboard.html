@@ -1,9 +1,11 @@
-{% load static %} {% static "js" as baseUrl %} {% static "css" as baseUrl %} {%
-static "images" as baseUrl %}{% static "icons" as baseUrl %}
+{% load static %} {% static "js" as baseUrl %} {% static "css" as baseUrl %} 
+{% static "images" as baseUrl %}
+{% static "icons" as baseUrl %}
 <!DOCTYPE html>
 
 <html lang="en">
 	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link
 			rel="shortcut icon"
 			href="{% static 'images/logo112.ico' %}"
@@ -72,7 +74,7 @@ static "images" as baseUrl %}{% static "icons" as baseUrl %}
 			</div>
 		</nav>
 		<div
-			class="d-flex flex-row gap-3 align-items-center justify-content-center m-2"
+			class="d-flex flex-row gap-3 align-items-center justify-content-center m-2 flex-wrap"
 		>
 			<div
 				class="d-flex flex-column gap-2 align-items-start"
@@ -112,7 +114,7 @@ static "images" as baseUrl %}{% static "icons" as baseUrl %}
 		>
 			<p class="h5 text-dark mt-4">Recent Invoices</p>
 			<table
-				class="table table-responsive-sm w-50 table-bordered table-striped table-hover shadow-sm"
+				class="table table-responsive w-50 table-bordered table-striped table-hover shadow-sm"
 			>
 				<thead>
 					<tr>
@@ -144,7 +146,7 @@ static "images" as baseUrl %}{% static "icons" as baseUrl %}
 			class="d-flex flex-column gap-3 align-items-center justify-content-center m-2"
 		>
 			<p class="h5 text-primary mt-4">Expense Reports</p>
-			<div style="width: 700px">
+			<div style="width: 100%">
 				<canvas id="myexpensechart"></canvas>
 			</div>
 		</div>
