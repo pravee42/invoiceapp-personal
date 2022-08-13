@@ -505,3 +505,10 @@ def editInvoice(request, pk):
 def DraftInvoice(request):
     getdrafts = DraftInvoices.objects.all()
     return render(request, 'draftInvoice.html', {'invoice': getdrafts})
+
+
+def DeleteDraftInvoice(request, pk):
+    dd = DraftInvoices.objects.get(invoice_number=pk)
+    dd.delete()
+    url = '/'
+    return redirect(url)

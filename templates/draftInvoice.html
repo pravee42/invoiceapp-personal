@@ -1,21 +1,34 @@
 {% extends 'base.html' %} {% block content %}
 <div class="d-flex p-3 flex-column flex-wrap gap-2 mt-3">
-    <table class="table-sm table-bordered table-responsive-sm shadow-sm">
-        <thead class="bg-dark">
-            <tr class="text-white fs-7">
-                <th>Invoice Number</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for bills in invoice %}
-            <tr>
-                <td class="h6">
-                    <a class="btn btn-link btn-sm w-100" href="/createinvoice/{{ bills.invoice_number }}/">
-                        {{bills.invoice_number}}</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+	<table class="table-sm table-bordered table-responsive-sm shadow-sm w-50">
+		<thead class="bg-dark">
+			<tr class="text-white fs-7">
+				<th>Invoice Number</th>
+				<th>Delete Draft</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for bills in invoice %}
+			<tr>
+				<td class="h6">
+					<a
+						class="btn btn-link btn-sm w-100"
+						href="/createinvoice/{{ bills.invoice_number }}/"
+					>
+						{{bills.invoice_number}}</a
+					>
+				</td>
+				<td class="h6">
+					<a
+						class="btn btn-danger"
+						href="/delete/draft/{{ bills.invoice_number }}/"
+					>
+						X</a
+					>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 </div>
 {% endblock %}

@@ -38,6 +38,7 @@ urlpatterns = [
     path('expenses/<str:expId>/', views.EditExpenses),
     path('deleteexpenses/<str:pk>/', views.DeleteExpense),
     path('editinvoice/<str:pk>/', views.editInvoice),
-    path('drafts/', views.DraftInvoice)
+    path('drafts/', views.DraftInvoice),
+    path('delete/draft/<str:pk>/', views.DeleteDraftInvoice)
 #     path('test/', views.WorkTest),
 ]
