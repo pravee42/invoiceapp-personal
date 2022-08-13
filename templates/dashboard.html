@@ -91,22 +91,27 @@
 					style="width: 200px"
 				>
 					<span class="text-primary">Total Sales</span>
-					<span class="h5 text-dark">₹{{sale}}</span>
+					<span class="h5 text-dark">Rs. {{sale}}</span>
 				</div>
 				<div
 					class="rounded border border-primary border-opacity-50 p-3 d-flex flex-column align-items-end"
 					style="width: 200px"
 				>
 					<span class="text-success">Total Receipts</span>
-					<span class="h5 text-dark">₹{{payments}}</span>
+					<span class="h5 text-dark">Rs. {{payments}}</span>
 				</div>
 				<div
 					class="rounded border border-primary border-opacity-50 p-3 d-flex flex-column align-items-end"
 					style="width: 200px"
 				>
 					<span class="text-danger">Total Expenses</span>
-					<span class="h5 text-dark">₹{{expense}}</span>
+					<span class="h5 text-dark">Rs. {{expense}}</span>
 				</div>
+				<div class="rounded border border-primary border-opacity-50 p-3 d-flex flex-column align-items-end"
+					style="width: 200px" onclick="window.location.href='/drafts/'">
+					<span class="h5 text-dark">View Drafts</span>
+				</div>
+			
 			</div>
 		</div>
 		<div
@@ -146,7 +151,7 @@
 			class="d-flex flex-column gap-3 align-items-center justify-content-center m-2"
 		>
 			<p class="h5 text-primary mt-4">Expense Reports</p>
-			<div style="width: 100%">
+			<div style="width: 80%">
 				<canvas id="myexpensechart"></canvas>
 			</div>
 		</div>
@@ -241,7 +246,7 @@
 					labels: aa[0],
 					datasets: [
 						{
-							label: 'Sales',
+							label: 'Expenses',
 							data: aa[1],
 							backgroundColor: [
 								'rgba(153, 102, 255, 0.2)',

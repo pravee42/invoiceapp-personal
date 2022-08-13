@@ -69,7 +69,10 @@
 			>Print</button
 		>
 		<button onclick="window.open('/payments/history/{{indata.billnumber}}/', 'Abipravi Billing Softwares', 'width=max,height=max')"
-			class="teal-button" accesskey="p">Payments</button>
+			class="teal-button">Payments</button>
+		<a
+			href="/editinvoice/{{indata.billnumber}}/"
+			class="btn btn-outline-dark" accesskey="p">Edit Invoice</a>
 
 		{% if balance >= 5 %}
 		<button onclick="window.open('/payments/create/{{indata.billnumber}}/')" class="btn btn-primary">Make Payment</button>

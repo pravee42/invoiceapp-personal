@@ -35,5 +35,9 @@ urlpatterns = [
     path('api/chart/', views.chartData),
     path('api/chart/expense/', views.apiChartExpense),
     path('api/products/<str:stra>/', views.search_products),
+    path('expenses/<str:expId>/', views.EditExpenses),
+    path('deleteexpenses/<str:pk>/', views.DeleteExpense),
+    path('editinvoice/<str:pk>/', views.editInvoice),
+    path('drafts/', views.DraftInvoice)
 #     path('test/', views.WorkTest),
 ]

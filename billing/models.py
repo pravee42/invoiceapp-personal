@@ -85,3 +85,6 @@ class Expenses(models.Model):
     costumer_name = models.CharField(max_length=100, default='Non Billable Expense')
     notes = models.TextField(blank=True)
     date = models.CharField(max_length=100, default=str(datetime.date.today()))
+
+class DraftInvoices(models.Model):
+    invoice_number = models.CharField(max_length=100)

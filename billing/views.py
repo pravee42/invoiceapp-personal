@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Invoice, InvoiceBills, Products, Payments, Costumersmodel, Test, Expenses
+from .models import Invoice, InvoiceBills, Products, Payments, Costumersmodel, Test, Expenses, DraftInvoices
 from django.http import HttpResponse, JsonResponse
 import secrets
 from django.db.models import Case, Value, When, Count, Sum
@@ -186,6 +186,9 @@ def printInvoice(request, uid):
 def deleteInvoice(request, uid):
     try:
         delete = Invoice.objects.get(billnumber=uid)
+        del_payemnts = Payments.objects.filter(invoice=uid)
+        for m in del_payemnts:
+            m.delete()
     except Invoice.DoesNotExist:
         return redirect("index")
     delete.delete()
@@ -411,7 +414,7 @@ def expenses(request):
         ammount = request.POST['ammount']
         notes = request.POST['notes']
         Expenses.objects.create(expense_name=expense_name, ammount=ammount, costumer_name=costumer_name, notes=notes, date=date)
-        return redirect('/expenses/')
+        return redirect('/expenses/dashboard/')
     return render(request, "expenses/expenses.html")
 
 
@@ -460,3 +463,45 @@ def search_products(request, stra):
     products = Products.objects.filter(product_name__icontains=stra).values(
         'product_name', 'product_price', 'gst')
     return JsonResponse(list(products), safe=False)
+
+def EditExpenses(request, expId):
+    expenses = Expenses.objects.get(id=expId)
+    if request.method == "POST":
+        expense_name = request.POST['expense_name']
+        date = request.POST['date']
+        costumer_name = request.POST['costumer_name']
+        ammount = request.POST['ammount']
+        notes = request.POST['notes']
+        expenses.expense_name=expense_name
+        expenses.ammount=ammount
+        expenses.costumer_name=costumer_name
+        expenses.notes=notes
+        expenses.date=date
+        expenses.save()
+        return redirect('/expenses/dashboard/')
+    else:
+        return render(request, 'expenses/editExpense.html', {'expense': expenses})
+
+def DeleteExpense(request, pk):
+    try:
+        delete = Expenses.objects.get(id=pk)
+    except Expenses.DoesNotExist:
+        return render(request, 'errorpages/norecord.html', {'title': 'Expense Not Found'})
+    delete.delete()
+    return redirect("/expenses/dashboard/")
+
+def editInvoice(request, pk):
+    if request.method == "POST":
+        pass
+    del_payemnts = Payments.objects.filter(invoice=pk)
+    for m in del_payemnts:
+        m.delete()
+    inv = Invoice.objects.get(billnumber=pk)
+    inv.delete()
+    DraftInvoices.objects.create(invoice_number=pk)
+    url = '/createinvoice/'+pk
+    return redirect(url)
+    
+def DraftInvoice(request):
+    getdrafts = DraftInvoices.objects.all()
+    return render(request, 'draftInvoice.html', {'invoice': getdrafts})
