@@ -39,6 +39,9 @@ urlpatterns = [
     path('deleteexpenses/<str:pk>/', views.DeleteExpense),
     path('editinvoice/<str:pk>/', views.editInvoice),
     path('drafts/', views.DraftInvoice),
-    path('delete/draft/<str:pk>/', views.DeleteDraftInvoice)
+    path('delete/draft/<str:pk>/', views.DeleteDraftInvoice),
+    path('calendar/view/', views.CalendarView),
+    path('view/task/<str:pk>/', views.CalendarDetail),
+    path('calander/task/accept/<str:pk>/', views.CalendarAcceptTask),
 #     path('test/', views.WorkTest),
 ]

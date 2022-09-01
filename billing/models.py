@@ -88,3 +88,31 @@ class Expenses(models.Model):
 
 class DraftInvoices(models.Model):
     invoice_number = models.CharField(max_length=100)
+    
+class Services(models.Model):
+    service_number = models.CharField(max_length=100)
+    date = models.CharField(max_length=100)
+    ammount = models.IntegerField(default=0)
+    paid = models.IntegerField(default=0)
+    costumer_name = models.CharField(max_length=100, default="General Service")
+    contact_number = models.CharField(max_length=100)
+
+class ServicePayments(models.Model):
+    service_number = models.CharField(max_length=100)
+    date = models.CharField(max_length=100)
+    ammount = models.IntegerField(default=0)
+    refrence_number = models.CharField(max_length=100, default="Cash")
+    
+class Calendar(models.Model):
+    date = models.CharField(max_length=100)
+    task = models.CharField(max_length=100)
+    notes = models.TextField(blank=True)
+    contact_number = models.CharField(max_length=100, default="00000000000")
+    costumer_name = models.CharField(max_length=100, default="GTS")
+    completed = models.CharField(max_length=100, default="false")
+    tasktype=models.CharField(max_length=100, default="task")
+
+class ServiceWorks(models.Model):
+    service_number = models.CharField(max_length=100)
+    service = models.CharField(max_length=100)
+    ammount = models.IntegerField(default=0)

@@ -3,7 +3,7 @@
 
 <html lang="en">
 	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link
 			rel="shortcut icon"
 			href="{% static 'images/logo112.ico' %}"
@@ -16,7 +16,10 @@
 			crossorigin="anonymous"
 		></script>
 		<title>Invoice Application</title>
-		<link rel="stylesheet" href="{% static 'icons/bootstrap-icons.css' %}" />
+		<link
+			rel="stylesheet"
+			href="{% static 'icons/bootstrap-icons.css' %}"
+		/>
 		<link href="{% static 'css/stylesheet.css' %}" />
 	</head>
 	<body style="height: 100vh">
@@ -25,7 +28,9 @@
 			style="background-color: #21263c; color: #bbd0df"
 		>
 			<div class="container-fluid">
-				<a class="navbar-brand text-white" href="#">Rukshana Computers</a>
+				<a class="navbar-brand text-white" href="#"
+					>Rukshana Computers</a
+				>
 				<button
 					class="navbar-toggler"
 					type="button"
@@ -45,19 +50,30 @@
 						<a class="nav-link text-white active" href="/"
 							><i class="bi bi-columns-gap"></i> Home</a
 						>
-						<a class="nav-link text-white" accesskey="c" href="/create/"
+						<a
+							class="nav-link text-white"
+							accesskey="c"
+							href="/create/"
 							><i class="bi bi-receipt"></i> Create Invoice</a
 						>
+
+						<!--  <a class="nav-link text-white" href="/calendar/view/"><i class="bi bi-person-video2"></i> Calendar</a> -->
 						<a
 							class="nav-link text-white"
 							accesskey="q"
 							href="/create/product/view/"
 							><i class="bi bi-diagram-2"></i> Products</a
 						>
-						<a class="nav-link text-white" accesskey="Z" href="/reports/view/"
+						<a
+							class="nav-link text-white"
+							accesskey="Z"
+							href="/reports/view/"
 							><i class="bi bi-card-checklist"></i> Reports</a
 						>
-						<a class="nav-link text-white" accesskey="s" href="/costumers/view/"
+						<a
+							class="nav-link text-white"
+							accesskey="s"
+							href="/costumers/view/"
 							><i class="bi bi-person-video2"></i> Costumers</a
 						>
 						<a
@@ -65,7 +81,8 @@
 							href="/expenses/dashboard/"
 							accesskey="e"
 							onmouseover="show_menu_expenses()"
-							><i class="bi bi-arrows-angle-expand"></i> Expenses</a
+							><i class="bi bi-arrows-angle-expand"></i>
+							Expenses</a
 						>
 						<a class="nav-link text-white" href="/admin"
 							><i class="bi bi-person-circle"></i> Admin Panel</a

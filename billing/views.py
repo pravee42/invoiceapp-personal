@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Invoice, InvoiceBills, Products, Payments, Costumersmodel, Test, Expenses, DraftInvoices
+from .models import Invoice, InvoiceBills, Products, Payments, Costumersmodel, Test, Expenses, DraftInvoices, Calendar
 from django.http import HttpResponse, JsonResponse
 import secrets
 from django.db.models import Case, Value, When, Count, Sum
@@ -512,3 +512,19 @@ def DeleteDraftInvoice(request, pk):
     dd.delete()
     url = '/'
     return redirect(url)
+
+
+def CalendarView(request):
+    data = Calendar.objects.all()
+    return render(request, "calendar/task.html", {'data': data})
+
+
+def CalendarDetail(request, pk):
+    data = Calendar.objects.get(id=pk)
+    return render(request, "calendar/taskdetail.html", {'data': data})
+
+def CalendarAcceptTask(request, pk): 
+    data = Calendar.objects.get(id=pk)
+    data.completed = "accepted"
+    data.save()
+    return redirect('/calendar/view/')
