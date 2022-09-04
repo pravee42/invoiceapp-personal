@@ -1,112 +1,69 @@
-{% load static %} {% static "js" as baseUrl %} {% static "css" as baseUrl %} 
+{% load static %} {% static "js" as baseUrl %} {% static "css" as baseUrl %}
 {% static "images" as baseUrl %}
 {% static "icons" as baseUrl %}
 <!DOCTYPE html>
 
 <html lang="en">
+
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link
-			rel="shortcut icon"
-			href="{% static 'images/logo112.ico' %}"
-			type="image/x-icon"
-		/>
+		<link rel="shortcut icon" href="{% static 'images/logo112.ico' %}" type="image/x-icon" />
 		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
 		<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-		<script
-			src="{% static 'js/bootstrap.min.js' %}"
-			crossorigin="anonymous"
-		></script>
+		<script src="{% static 'js/bootstrap.min.js' %}" crossorigin="anonymous"></script>
 		<title>Rukshana Computers - Dashboard</title>
 		<link rel="stylesheet" href="{% static 'icons/bootstrap-icons.css' %}" />
 		<link href="{% static 'css/stylesheet.css' %}" />
 	</head>
 
 	<body style="height: 100vh">
-		<nav
-			class="navbar navbar-expand-lg position-sticky top-0"
-			style="background-color: #21263c"
-		>
+		<nav class="navbar navbar-expand-lg position-sticky top-0" style="background-color: #21263c">
 			<div class="container-fluid">
 				<a class="navbar-brand text-white" href="#">Rukshana Computers</a>
-				<button
-					class="navbar-toggler"
-					type="button"
-					data-bs-toggle="collapse"
-					data-bs-target="#navbarNavAltMarkup"
-					aria-controls="navbarNavAltMarkup"
-					aria-expanded="false"
-					aria-label="Toggle navigation"
-				>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+					aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
-				<div
-					class="collapse navbar-collapse text-white"
-					id="navbarNavAltMarkup"
-				>
+				<div class="collapse navbar-collapse text-white" id="navbarNavAltMarkup">
 					<div class="navbar-nav">
-						<a class="nav-link text-white active" href="/"
-							><i class="bi bi-columns-gap"></i> Home</a
-						>
-						<a class="nav-link text-white" accesskey="c" href="/create/"
-							><i class="bi bi-receipt"></i> Create Invoice</a
-						>
-						<!-- <a class="nav-link text-white" href="/calendar/view/"
-	><i class="bi bi-person-video2"></i> Calendar</a
-> -->
-						<a class="nav-link text-white" href="/create/product/view/"
-							><i class="bi bi-diagram-2"></i> Products</a
-						>
-						<a class="nav-link text-white" href="/reports/view/"
-							><i class="bi bi-card-checklist"></i> Reports</a
-						>
-						<a class="nav-link text-white" href="/costumers/view/"
-							><i class="bi bi-person-video2"></i> Costumers</a
-						>
-						<a
-							class="nav-link text-white"
-							href="/expenses/dashboard/"
-							onmouseover="show_menu_expenses()"
-							><i class="bi bi-arrows-angle-expand"></i> Expenses</a
-						>
-						<a class="nav-link text-white" href="/admin"
-							><i class="bi bi-person-circle"></i> Admin Panel</a
-						>
+						<a class="nav-link text-white active" href="/"><i class="bi bi-columns-gap"></i> Home</a>
+						<a class="nav-link text-white" accesskey="c" href="/create/"><i class="bi bi-receipt"></i>
+							Create Invoice</a>
+						<a class="nav-link text-white" href="/calendar/view/task/"><i class="bi bi-person-video2"></i>
+							Calendar</a>
+						<a class="nav-link text-white" href="/create/product/view/"><i class="bi bi-diagram-2"></i>
+							Products</a>
+						<a class="nav-link text-white" href="/reports/view/"><i class="bi bi-card-checklist"></i>
+							Reports</a>
+						<a class="nav-link text-white" href="/costumers/view/"><i class="bi bi-person-video2"></i>
+							Costumers</a>
+						<a class="nav-link text-white" href="/expenses/dashboard/" onmouseover="show_menu_expenses()"><i
+								class="bi bi-arrows-angle-expand"></i> Expenses</a>
+						<a class="nav-link text-white" href="/admin"><i class="bi bi-person-circle"></i> Admin Panel</a>
 					</div>
 				</div>
 			</div>
 		</nav>
-		<div
-			class="d-flex flex-row gap-3 align-items-center justify-content-center m-2 flex-wrap"
-		>
-			<div
-				class="d-flex flex-column gap-2 align-items-start"
-				style="width: 700px"
-			>
+		<div class="d-flex flex-row gap-3 align-items-center justify-content-center m-2 flex-wrap">
+			<div class="d-flex flex-column gap-2 align-items-start" style="width: 700px">
 				<p class="h5 text-primary mt-4">Sales Reports</p>
 				<canvas id="myChart"></canvas>
 			</div>
 			<div class="d-flex flex-column gap-2 align-items-center">
-				<div
-					accesskey="f"
-					onclick="window.location.href='/viewinvoices/'"
+				<div accesskey="f" onclick="window.location.href='/viewinvoices/'"
 					class="rounded border border-primary border-opacity-50 p-3 d-flex flex-column align-items-end"
-					style="width: 200px"
-				>
+					style="width: 200px">
 					<span class="text-primary">Total Sales</span>
 					<span class="h5 text-dark">Rs. {{sale}}</span>
 				</div>
-				<div
-					class="rounded border border-primary border-opacity-50 p-3 d-flex flex-column align-items-end"
-					style="width: 200px"
-				>
+				<div class="rounded border border-primary border-opacity-50 p-3 d-flex flex-column align-items-end"
+					style="width: 200px">
 					<span class="text-success">Total Receipts</span>
 					<span class="h5 text-dark">Rs. {{payments}}</span>
 				</div>
-				<div
-					class="rounded border border-primary border-opacity-50 p-3 d-flex flex-column align-items-end"
-					style="width: 200px"
-				>
+				<div class="rounded border border-primary border-opacity-50 p-3 d-flex flex-column align-items-end"
+					style="width: 200px">
 					<span class="text-danger">Total Expenses</span>
 					<span class="h5 text-dark">Rs. {{expense}}</span>
 				</div>
@@ -114,16 +71,12 @@
 					style="width: 200px" onclick="window.location.href='/drafts/'">
 					<span class="h5 text-dark">View Drafts</span>
 				</div>
-			
+
 			</div>
 		</div>
-		<div
-			class="d-flex flex-column gap-3 align-items-center justify-content-center m-2"
-		>
+		<div class="d-flex flex-column gap-3 align-items-center justify-content-center m-2">
 			<p class="h5 text-dark mt-4">Recent Invoices</p>
-			<table
-				class="table table-responsive w-50 table-bordered table-striped table-hover shadow-sm"
-			>
+			<table class="table table-responsive w-50 table-bordered table-striped table-hover shadow-sm">
 				<thead>
 					<tr>
 						<th>Invoice ID</th>
@@ -135,9 +88,7 @@
 					{% for data in invoices %}
 					<tr>
 						<td>
-							<a class="nav-link text-dark" href="/detail/{{data.billnumber}}/"
-								>{{data.billnumber}}</a
-							>
+							<a class="nav-link text-dark" href="/detail/{{data.billnumber}}/">{{data.billnumber}}</a>
 						</td>
 						{% if data.costumer_name|length > 1 %}
 						<td>{{data.costumer_name}}</td>
@@ -150,21 +101,16 @@
 				</tbody>
 			</table>
 		</div>
-		<div
-			class="d-flex flex-column gap-3 align-items-center justify-content-center m-2"
-		>
+		<div class="d-flex flex-column gap-3 align-items-center justify-content-center m-2">
 			<p class="h5 text-primary mt-4">Expense Reports</p>
 			<div style="width: 80%">
 				<canvas id="myexpensechart"></canvas>
 			</div>
 		</div>
 	</body>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.2/chart.min.js"
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.2/chart.min.js"
 		integrity="sha512-zjlf0U0eJmSo1Le4/zcZI51ks5SjuQXkU0yOdsOBubjSmio9iCUp8XPLkEAADZNBdR9crRy3cniZ65LF2w8sRA=="
-		crossorigin="anonymous"
-		referrerpolicy="no-referrer"
-	></script>
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script>
 		async function getData() {
 			var sale_data = [];
@@ -329,4 +275,5 @@
 		//         },
 		//     });
 	</script>
+
 </html>

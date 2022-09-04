@@ -514,17 +514,45 @@ def DeleteDraftInvoice(request, pk):
     return redirect(url)
 
 
-def CalendarView(request):
-    data = Calendar.objects.all()
-    return render(request, "calendar/task.html", {'data': data})
+def CalendarView(request, pk):
+    if pk == "task":
+        data = Calendar.objects.filter(tasktype=pk)
+        return render(request, "calendar/task.html", {'data': data, 'tt': pk})
+    else:
+        data = Calendar.objects.filter(tasktype=pk)
+        return render(request, "calendar/task.html", {'data': data, 'tt': pk})
 
 
 def CalendarDetail(request, pk):
     data = Calendar.objects.get(id=pk)
     return render(request, "calendar/taskdetail.html", {'data': data})
 
-def CalendarAcceptTask(request, pk): 
-    data = Calendar.objects.get(id=pk)
-    data.completed = "accepted"
-    data.save()
-    return redirect('/calendar/view/')
+def CalendarAcceptDeleteTask(request, pk, url1, method): 
+    if method == 'accept':
+        data = Calendar.objects.get(id=pk)
+        data.completed = "accepted"
+        data.save()
+        url = '/calendar/view/' + url1
+        return redirect(url)
+    elif method == 'delete':
+       data = Calendar.objects.get(id=pk)
+       data.delete()
+       url = '/calendar/view/' + url1
+       return redirect(url)
+
+def CalendarCreateTask(request):
+    if request.method == "POST":
+        date = request.POST['date']
+        task = request.POST['task']
+        notes = request.POST['notes']
+        contact_number = request.POST['contact_number']
+        costumer_name = request.POST['costumer_name']
+        completed = 'false'
+        tasktype = request.POST['tasktype']
+        url = '/calendar/view/' + tasktype
+        Calendar.objects.create(date=date, task=task,notes=notes, contact_number=contact_number, costumer_name=costumer_name, completed=completed, tasktype=tasktype)
+        return redirect(url)
+    else:
+        a = 'newa'
+        return render(request, "calendar/newevent.html", {'tt': a})
+    

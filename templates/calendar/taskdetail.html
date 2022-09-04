@@ -4,45 +4,65 @@
 		box-shadow: inset 0 -3px 0px rgba(0, 0, 0, 0.075) !important;
 		transition: 0.4s ease-in;
 	}
+
 	.buttonbtn {
-	    border: 1px solid #0d6efd;
-	    background-color: transparent;
-	    padding: 15px;
-	    border-style: dashed;
-	    border-radius: 10px;
-	    color: #df510d;
-	    margin:10px;
-	    transition: .1s all;
-	    box-shadow: inset 0px -4px 0px 0px #0d6efd;
+		border: 1px solid #0d6efd;
+		background-color: transparent;
+		padding: 15px;
+		border-style: dashed;
+		border-radius: 10px;
+		color: #df510d;
+		margin: 10px;
+		transition: .1s all;
+		box-shadow: inset 0px -4px 0px 0px #0d6efd;
 	}
+
 	.buttonbtn-green {
-	    border: 1px solid green;
-	    background-color: transparent;
-	    padding: 15px;
-	    border-style: dashed;
-	    border-radius: 10px;
-	    transition: .1s all;
-	    box-shadow: inset 0px -4px 0px 0px green;
+		border: 1px solid green;
+		background-color: transparent;
+		padding: 15px;
+		border-style: dashed;
+		border-radius: 10px;
+		transition: .1s all;
+		box-shadow: inset 0px -4px 0px 0px green;
 	}
+
 	.buttonbtn-green:active {
-	   box-shadow: inset 0px -1px 0px 0px green;
-	    color: green
+		box-shadow: inset 0px -1px 0px 0px green;
+		color: green
 	}
+
 	.buttonbtn-info {
-	    border: 1px solid #0dcaf0;
-	    background-color: transparent;
-	    padding: 15px;
-	    border-style: dashed;
-	    border-radius: 10px;
-	    transition: .1s all;
-	    box-shadow: inset 0px -4px 0px 0px #0dcaf0;
+		border: 1px solid #0dcaf0;
+		background-color: transparent;
+		padding: 15px;
+		border-style: dashed;
+		border-radius: 10px;
+		transition: .1s all;
+		box-shadow: inset 0px -4px 0px 0px #0dcaf0;
 	}
+
 	.buttonbtn-info:active {
-	   box-shadow: inset 0px -1px 0px 0px #0dcaf0;
+		box-shadow: inset 0px -1px 0px 0px #0dcaf0;
 	}
+
 	.buttonbtn:active {
-	    box-shadow: inset 0px -1px 0px 0px #0d6efd;
-	    color: blue
+		box-shadow: inset 0px -1px 0px 0px #0d6efd;
+		color: blue
+	}
+
+	.buttonbtn-danger {
+		border: 1px solid #f00d18;
+		background-color: transparent;
+		padding: 15px;
+		border-style: dashed;
+		border-radius: 10px;
+		transition: .1s all;
+		box-shadow: inset 0px -4px 0px 0px #f00d18;
+	}
+
+	.buttonbtn-danger:active {
+		box-shadow: inset 0px -1px 0px 0px #f00d18;
 	}
 </style>
 
@@ -51,8 +71,7 @@
 	<div class="d-flex flex-column gap-2 align-items-center p-1">
 		<div class="p-2">
 			<div
-				class="d-flex flex-column gap-2 rounded border border-light p-3 task_card_custom align-items-center justify-content-center"
-			>
+				class="d-flex flex-column gap-2 rounded border border-light p-3 task_card_custom align-items-center justify-content-center">
 				<div class="d-flex flex-column gap-3 w-100 align-items-center">
 					<p class="h5 text-dark">{{data.task}}</p>
 					<div class="d-flex flex-column p-2 gap-3 align-items-start w-100">
@@ -76,10 +95,19 @@
 							</button>
 						</div>
 						{% elif data.completed == 'false' %}
-						<button class="buttonbtn-green" onclick="window.location.href='/calander/task/accept/{{data.id}}/'"> <i class="bi bi-patch-check"></i>  Accept Task</button>
-							{% elif data.completed == 'accepted' %}
-						<button class="buttonbtn-info" onclick="alert('Task in Progress')"> <i class="bi bi-patch-check"></i>  Add Task Progress</button>
+						<button class="buttonbtn-green"
+							onclick="window.location.href='/calander/task/accept/{{data.id}}/{{data.tasktype}}/accept/'">
+							<i class="bi bi-patch-check"></i> Accept Task</button>
+						{% elif data.completed == 'accepted' and data.tasktype != 'service' %}
+						<button class="buttonbtn-info" onclick="alert('Task in Progress')"> <i
+								class="bi bi-patch-check"></i> Add Task Progress</button>
+						{% elif data.tasktype == 'service' %}
+						<button class="buttonbtn-info" onclick="alert('Task in Progress')"> <i
+								class="bi bi-patch-check"></i> Add Service Progress</button>
 						{% endif %}
+						<button class="buttonbtn-danger"
+							onclick="window.location.href='/calander/task/accept/{{data.id}}/{{data.tasktype}}/delete/'">
+							<i class="bi bi-patch-check"></i> Delete Task</button>
 					</div>
 				</div>
 			</div>
