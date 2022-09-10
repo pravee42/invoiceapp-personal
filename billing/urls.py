@@ -44,6 +44,8 @@ urlpatterns = [
     path('view/task/<str:pk>/', views.CalendarDetail),
     path('calander/task/accept/<str:pk>/<str:url1>/<str:method>/',
          views.CalendarAcceptDeleteTask),
-    path('calendar/event/new/',views.CalendarCreateTask)
+    path('calendar/event/new/',views.CalendarCreateTask),
+    path('calendar/event/service/process/<str:pk>/', views.serviceProcess),
+    path('complete/service/<str:pk>/', views.completePaymentService)
 #     path('test/', views.WorkTest),
 ]

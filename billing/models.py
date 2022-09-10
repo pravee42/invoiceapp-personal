@@ -90,6 +90,7 @@ class DraftInvoices(models.Model):
     invoice_number = models.CharField(max_length=100)
     
 class Services(models.Model):
+    taskid= models.CharField(max_length=100, blank=True)
     service_number = models.CharField(max_length=100)
     date = models.CharField(max_length=100)
     ammount = models.IntegerField(default=0)

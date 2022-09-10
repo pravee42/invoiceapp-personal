@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Invoice, InvoiceBills, Products, Payments, Costumersmodel, Test, Expenses, DraftInvoices, Services, ServicePayments, Calendar
+from .models import Invoice, InvoiceBills, Products, Payments, Costumersmodel, Test, Expenses, DraftInvoices, Services, ServicePayments, Calendar, ServiceWorks
 # Register your models here.
 
 class InvoiceAdmin(admin.ModelAdmin):
@@ -31,3 +31,4 @@ admin.site.register(DraftInvoices)
 admin.site.register(Services)
 admin.site.register(ServicePayments)
 admin.site.register(Calendar)
+admin.site.register(ServiceWorks)

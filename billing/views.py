@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Invoice, InvoiceBills, Products, Payments, Costumersmodel, Test, Expenses, DraftInvoices, Calendar
+from .models import Invoice, InvoiceBills, Products, Payments, Costumersmodel, Test, Expenses, DraftInvoices, Calendar, Services, ServiceWorks
 from django.http import HttpResponse, JsonResponse
 import secrets
 from django.db.models import Case, Value, When, Count, Sum
@@ -539,6 +539,12 @@ def CalendarAcceptDeleteTask(request, pk, url1, method):
        data.delete()
        url = '/calendar/view/' + url1
        return redirect(url)
+    elif method == 'complete':
+        data = Calendar.objects.get(id=pk)
+        data.completed = "true"
+        data.save()
+        url = '/calendar/view/' + url1
+        return redirect(url)
 
 def CalendarCreateTask(request):
     if request.method == "POST":
@@ -555,4 +561,41 @@ def CalendarCreateTask(request):
     else:
         a = 'newa'
         return render(request, "calendar/newevent.html", {'tt': a})
-    
+
+def serviceProcess(request, pk):
+    if request.method == "GET":
+        calendar_data = Calendar.objects.get(id=pk)
+        service_number = random_with_N_digits(11)
+        try:
+            services = Services.objects.get(taskid=pk)
+            try:
+                works = ServiceWorks.objects.filter(service_number=pk).values('ammount')
+                totalammount = 0
+                for x in works:
+                    totalammount += int(x['ammount'])
+                services.ammount = totalammount
+                services.save()
+            except ServiceWorks.DoesNotExist:
+                services = Services.objects.get(taskid=pk)
+        except Services.DoesNotExist:
+            taskid = pk
+            date = str(datetime.date.today())
+            ammount = 0
+            paid = 0
+            costumer_name = calendar_data.costumer_name
+            contact_number = calendar_data.contact_number
+            Services.objects.create(taskid=taskid, service_number=service_number, date=date,
+                                    ammount=ammount, paid=paid, costumer_name=costumer_name, contact_number=contact_number)
+        data = Services.objects.get(taskid=pk)     
+        serviceworks = ServiceWorks.objects.filter(service_number=pk)     
+          
+        return render(request, 'calendar/serviceprocess.html', {'service_number': service_number, 'servicedata': data, 'service': serviceworks})
+    elif request.method == 'POST':
+        service = request.POST['service']
+        ammount = request.POST['ammount']
+        ServiceWorks.objects.create(service_number=pk, service=service, ammount=ammount)
+        url = '/calendar/event/service/process/'+pk+'/'
+        return redirect(url)
+
+def completePaymentService(request, pk):
+    pass
