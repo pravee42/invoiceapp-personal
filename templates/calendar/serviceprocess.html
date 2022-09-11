@@ -91,7 +91,7 @@
                             <input type="text" name="service" class="form-control" placeholder="Service Item Name" style="outline:none" required>
                             <input type="text" name="ammount" class="form-control" placeholder="Price" style="outline:none" required>
                             <button type="submit" class="btn btn-primary">Add Service</button>
-                            <a onclick="window.location.href='/complete/service/{{servicedata.service_number}}/'" class="btn btn-primary">Complete Service</a>
+                            <a onclick="window.open('/complete/service/{{servicedata.service_number}}/')" class="btn btn-primary">Complete Service</a>
                         </form>
                     </div>
                 </div>

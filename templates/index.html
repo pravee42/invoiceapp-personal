@@ -16,7 +16,7 @@
 				<th>Invoice Number</th>
 				<th>Customer Name</th>
 				<!-- <th>Paid Ammount</th> -->
-				<!-- <th>Remaning Balance</th> -->
+				<th>Remaning Balance</th>
 				<th>Due Date</th>
 			</tr>
 		</thead>
@@ -37,7 +37,11 @@
 				<td class="text-danger">POS</td>
 				{% endif %}
 				<!-- <td>{{bills.ammountpaid}}</td> -->
-				<!-- <td>{{bills.balance}}</td> -->
+				{% if bills.balance > 0 %}
+				<td>{{bills.balance}}</td>
+				{% else %}
+				<td class="text-secondary"></td>
+				{% endif %}
 				<td>{{bills.due_date}}</td>
 			</tr>
 			{% endfor %}

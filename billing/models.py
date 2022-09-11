@@ -102,7 +102,8 @@ class ServicePayments(models.Model):
     service_number = models.CharField(max_length=100)
     date = models.CharField(max_length=100)
     ammount = models.IntegerField(default=0)
-    refrence_number = models.CharField(max_length=100, default="Cash")
+    refrence_number = models.CharField(max_length=100, default="01234")
+    paymentmode= models.CharField(max_length=100, default='cash')
     
 class Calendar(models.Model):
     date = models.CharField(max_length=100)

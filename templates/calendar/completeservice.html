@@ -1,0 +1,107 @@
+<link
+	rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css"
+	integrity="sha384-yHIFVG6ClnONEA5yB5DJXfW2/KC173DIQrYoZMEtBvGzmf0PKiGyNEqe9N6BNDBH"
+	crossorigin="anonymous"
+/>
+
+<style>
+	.success {
+		color: white;
+		border-radius: 4px;
+		text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+		background-color: rgb(28, 184, 65);
+	}
+</style>
+{% extends 'base.html' %} {% block content %}
+
+<div class="w-100 d-flex flex-row justify-content-center">
+	<div
+		class="mt-2 p-3 w-50 d-flex flex-row gap-3 justify-content-evenly align-items-center"
+	>
+		<div class="d-flex flex-column align-items-center justify-content-center">
+			<p class="bg-primary text-white rounded p-2 m-4">
+				{{service.costumer_name}}
+			</p>
+			<div class="">
+				<form method="POST" class="pure-form">
+					{% csrf_token %}
+					<table class="table table-bordered">
+						<tbody>
+							<tr>
+								<td>Ammount</td>
+								<td>{{service.ammount}}</td>
+							</tr>
+							<tr>
+								<td>Ammount Paid</td>
+								<td>{{service.paid}}</td>
+							</tr>
+							<tr>
+								<td>Date of Service</td>
+								<td>{{service.date}}</td>
+							</tr>
+							<tr>
+								<td>Ammount Paying</td>
+								<td>
+									<input
+										type="number"
+										name="ammount"
+										class=""
+										placeholder="Enter Ammount"
+										min="0"
+										required
+									/>
+								</td>
+							</tr>
+                            <tr>
+                                <td>Refrence Number</td>
+                                <td>
+                                    <input type="text" name="refrence_number" placeholder="for NFETs and e-payments">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Payment Mode</td>
+                                <td>
+                                    <select name="mode">
+                                        <option value="cash">Cash</option>
+                                        <option value="neft">NEFT</option>
+                                        <option value="gay">GPAY</option>
+                                        <option value="phonepay">PHONEPAY</option>
+                                        <option value="paytm">PAYTM</option>
+                                        <option value="accounttransfer">Account Transfer</option>
+                                        <option value="dd">Draft Deposit [DD]</option>
+                                        <option value="cheque">Cheque</option>
+                                    </select>
+                                </td>
+                            </tr>
+							<tr>
+								<td colspan="2">
+									<button class="pure-button success">Make Payment</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+		</div>
+		<div>
+			<table class="table table-bordered table-hover">
+				<thead class="thead table-dark">
+					<tr>
+						<td>Service Name</td>
+						<td>Price</td>
+					</tr>
+				</thead>
+				<tbody>
+					{% for x in products %}
+					<tr>
+						<td>{{x.service}}</td>
+						<td>{{x.ammount}}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock %}

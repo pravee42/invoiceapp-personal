@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Invoice, InvoiceBills, Products, Payments, Costumersmodel, Test, Expenses, DraftInvoices, Calendar, Services, ServiceWorks
+from .models import Invoice, InvoiceBills, Products, Payments, Costumersmodel, Test, Expenses, DraftInvoices, Calendar, Services, ServiceWorks, ServicePayments
 from django.http import HttpResponse, JsonResponse
 import secrets
 from django.db.models import Case, Value, When, Count, Sum
@@ -377,9 +377,12 @@ def NewPayment(request, id, balance, paid):
             refrence_number=refrence_number,
             ammount=ammount,
         )
-        cs_data = Costumersmodel.objects.get(id=update_data.costumer_id)
-        cs_data.paid_ammount = int(cs_data.paid_ammount) + int(ammount)
-        cs_data.save()
+        try:
+            cs_data = Costumersmodel.objects.get(id=update_data.costumer_id)
+            cs_data.paid_ammount = int(cs_data.paid_ammount) + int(ammount)
+            cs_data.save()
+        except Costumersmodel.DoesNotExist:
+            pass
     url = "/success/" + "Payment Updated Successfully You may close this Tab"
     return redirect(url)
 
@@ -569,7 +572,7 @@ def serviceProcess(request, pk):
         try:
             services = Services.objects.get(taskid=pk)
             try:
-                works = ServiceWorks.objects.filter(service_number=pk).values('ammount')
+                works = ServiceWorks.objects.filter(service_number=services.service_number).values('ammount')
                 totalammount = 0
                 for x in works:
                     totalammount += int(x['ammount'])
@@ -587,15 +590,40 @@ def serviceProcess(request, pk):
             Services.objects.create(taskid=taskid, service_number=service_number, date=date,
                                     ammount=ammount, paid=paid, costumer_name=costumer_name, contact_number=contact_number)
         data = Services.objects.get(taskid=pk)     
-        serviceworks = ServiceWorks.objects.filter(service_number=pk)     
+        serviceworks = ServiceWorks.objects.filter(service_number=data.service_number)     
           
         return render(request, 'calendar/serviceprocess.html', {'service_number': service_number, 'servicedata': data, 'service': serviceworks})
     elif request.method == 'POST':
+        services = Services.objects.get(taskid=pk)
         service = request.POST['service']
         ammount = request.POST['ammount']
-        ServiceWorks.objects.create(service_number=pk, service=service, ammount=ammount)
+        ServiceWorks.objects.create(service_number=services.service_number, service=service, ammount=ammount)
         url = '/calendar/event/service/process/'+pk+'/'
         return redirect(url)
+    
+def ErrorView(request, pk):
+    return render(request, 'errorpages/error500.html', {'title':pk})
 
 def completePaymentService(request, pk):
-    pass
+    if request.method == 'GET':
+        service = Services.objects.get(service_number=pk)
+        serviceitems = ServiceWorks.objects.filter(service_number=pk)
+        return render(request, 'calendar/completeservice.html', {'service': service, 'products': serviceitems})
+    else:
+        ammount = request.POST['ammount']
+        refrence_number = request.POST['refrence_number']
+        mode = request.POST['mode']
+        try:
+            sss = Services.objects.get(service_number=pk)
+            sss.paid = int(ammount)
+            sss.save()
+            ServicePayments.objects.create(
+                service_number=pk, date=str(datetime.date.today()), ammount=ammount, refrence_number=refrence_number, paymentmode=mode)
+            calendar = Calendar.objects.get(id=sss.taskid)
+            calendar.completed = 'true'
+            calendar.save()
+            url = "/success/" + "Service Payment Updated Successfully You can close this tab"
+            return redirect(url)
+        except Services.DoesNotExist:
+            url = "/error/" + "Error Updating Payment Service"
+            return redirect(url)
