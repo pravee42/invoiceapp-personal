@@ -50,3 +50,4 @@ urlpatterns = [
     path('error/<str:pk>/', views.ErrorView)
 #     path('test/', views.WorkTest),
 ]
+

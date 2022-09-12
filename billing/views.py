@@ -3,6 +3,7 @@ from .models import Invoice, InvoiceBills, Products, Payments, Costumersmodel, T
 from django.http import HttpResponse, JsonResponse
 import secrets
 from django.db.models import Case, Value, When, Count, Sum
+
 from .forms import CreateInvoice
 from random import randint
 from num2words import num2words
@@ -627,3 +628,7 @@ def completePaymentService(request, pk):
         except Services.DoesNotExist:
             url = "/error/" + "Error Updating Payment Service"
             return redirect(url)
+
+
+def custom_error_404(request, exception):
+    return render(request, 'errorpages/error500.html', {'title': 'Not found'})
