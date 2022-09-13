@@ -631,4 +631,4 @@ def completePaymentService(request, pk):
 
 
 def custom_error_404(request, exception):
-    return render(request, 'errorpages/error500.html', {'title': 'Not found'})
+    return render(request, 'errorpages/error500.html', {'title': 'Page Not found'})
