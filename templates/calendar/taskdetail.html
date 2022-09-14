@@ -94,10 +94,16 @@
 						{% endif %} {% if data.contact_number|length > 2 %}
 						<p class="h6 text-secondary">Contact: {{data.contact_number}}</p>
 						{% endif %} {% if data.completed == 'true' %}
-						<p class="h6 text-success">Task Completed</p>
+						<p class="badge text-white bg-success">Task Completed</p>
 						{% else %}
 						<p class="h6 text-warning">In Completed Task</p>
-						{% endif %} {% if data.completed == 'true' %}
+						{% endif %} 
+						{% if data.is_due > 0 %}
+						<p class="h6 text-success">Task Completed</p>
+						{% else %}
+						<p class="badge text-white bg-danger">Payment Pending</p>
+						{% endif %}
+						{% if data.completed == 'true' %}
 						<div class="d-flex flex-row gap-1 w-100 h-50">
 							<button class="buttonbtn">
 								<i class="bi bi-clock-history"></i> Payments History
