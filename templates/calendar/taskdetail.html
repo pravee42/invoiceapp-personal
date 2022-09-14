@@ -69,14 +69,13 @@
 
 <script>
 	const loadDeleteURl = () => {
-		 var result = confirm("Are you sure want to delete!");
-		  if (result == true) {
-			window.location.href = '/calander/task/accept/{{data.id}}/{{data.tasktype}}/delete/'
+		var result = confirm('Are you sure want to delete!');
+		if (result == true) {
+			window.location.href =
+				'/calander/task/accept/{{data.id}}/{{data.tasktype}}/delete/';
 		}
-		
-	}
+	};
 </script>
-
 
 <div class="mt-2 p-3">
 	<div class="d-flex flex-column gap-2 align-items-center p-1">
@@ -97,20 +96,18 @@
 						<p class="badge text-white bg-success">Task Completed</p>
 						{% else %}
 						<p class="h6 text-warning">In Completed Task</p>
-						{% endif %} 
-						{% if data.is_due > 0 %}
-						<p class="h6 text-success">Task Completed</p>
-						{% else %}
-						<p class="badge text-white bg-danger">Payment Pending</p>
-						{% endif %}
-						{% if data.completed == 'true' %}
-						<div class="d-flex flex-row gap-1 w-100 h-50">
-							<button class="buttonbtn">
+						{% endif %} {% if due > 0 %}
+						<p class="badge text-white bg-danger">Pending Ammount: {{due}}</p>
+						{% endif %} {% if data.completed == 'true' %}
+						<div class="d-flex flex-row gap-1 w-100">
+							<button class="buttonbtn" onclick="window.location.href='/'">
 								<i class="bi bi-clock-history"></i> Payments History
 							</button>
-							<button class="buttonbtn">
+							{% if due > 0 %}
+							<button class="buttonbtn" onclick="window.location.href='/complete/service/{{service_number}}/'">
 								<i class="bi bi-wallet-fill"></i> Make Payment
 							</button>
+							{% endif %}
 						</div>
 						{% elif data.completed == 'false' %}
 						<button
@@ -120,18 +117,21 @@
 							<i class="bi bi-patch-check"></i> Accept Task
 						</button>
 						{% elif data.completed == 'accepted' and data.tasktype != 'service'%}
-						<button class="buttonbtn-info" onclick="window.location.href='/calendar/event/service/process/{{data.id}}/'">
+						<button
+							class="buttonbtn-info"
+							onclick="window.location.href='/calendar/event/service/process/{{data.id}}/'"
+						>
 							<i class="bi bi-patch-check"></i> Add Task Progress
 						</button>
 						{% elif data.tasktype == 'service' %}
-						<button class="buttonbtn-info" onclick="window.location.href='/calendar/event/service/process/{{data.id}}/'">
+						<button
+							class="buttonbtn-info"
+							onclick="window.location.href='/calendar/event/service/process/{{data.id}}/'"
+						>
 							<i class="bi bi-patch-check"></i> Add Service Progress
 						</button>
 						{% endif %}
-						<button
-							class="buttonbtn-danger"
-							onclick="loadDeleteURl()"
-						>
+						<button class="buttonbtn-danger" onclick="loadDeleteURl()">
 							<i class="bi bi-patch-check"></i> Delete Task
 						</button>
 						{% if data.completed != "true" and data.tasktype != 'service'%}

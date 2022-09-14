@@ -1,3 +1,4 @@
+{% extends 'base.html' %} {% block content %}
 {% load static %} {% static "images" as baseUrl %}
 <html>
 	<head>
@@ -13,13 +14,13 @@
 		/>
 	</head>
 	<style>
-		body {
+		.body {
 			text-align: center;
 			padding: 40px 0;
 			background: #ebf0f5;
 		}
 
-		h1 {
+		.h1 {
 			color: #88b04b;
 			font-family: 'Nunito Sans', 'Helvetica Neue', sans-serif;
 			font-weight: 900;
@@ -27,14 +28,14 @@
 			margin-bottom: 10px;
 		}
 
-		p {
+		.p {
 			color: #404f5e;
 			font-family: 'Nunito Sans', 'Helvetica Neue', sans-serif;
 			font-size: 20px;
 			margin: 0;
 		}
 
-		i {
+		.i {
 			color: #9abc66;
 			font-size: 100px;
 			line-height: 200px;
@@ -51,7 +52,7 @@
 		}
 	</style>
 
-	<body>
+	<body class="body">
 		<div class="card">
 			<div
 				style="
@@ -62,10 +63,11 @@
 					margin: 0 auto;
 				"
 			>
-				<i class="checkmark">✓</i>
+				<i class="checkmark i">✓</i>
 			</div>
-			<h1>Success</h1>
-			<p>{{message}}</p>
+			<h1 class="h1">Success</h1>
+			<p class="p">{{message}}</p>
 		</div>
 	</body>
 </html>
+{% endblock %}

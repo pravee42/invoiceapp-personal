@@ -529,7 +529,12 @@ def CalendarView(request, pk):
 
 def CalendarDetail(request, pk):
     data = Calendar.objects.get(id=pk)
-    return render(request, "calendar/taskdetail.html", {'data': data})
+    try:
+        services = Services.objects.get(taskid=pk)
+        due = services.ammount - services.paid
+        return render(request, "calendar/taskdetail.html", {'data': data, 'due':due, 'service_number': services.service_number})
+    except Services.DoesNotExist:
+        return render(request, "calendar/taskdetail.html", {'data': data})
 
 def CalendarAcceptDeleteTask(request, pk, url1, method): 
     if method == 'accept':
@@ -616,14 +621,14 @@ def completePaymentService(request, pk):
         mode = request.POST['mode']
         try:
             sss = Services.objects.get(service_number=pk)
-            sss.paid = int(ammount)
+            sss.paid = int(ammount) + int(sss.paid)
             sss.save()
             ServicePayments.objects.create(
                 service_number=pk, date=str(datetime.date.today()), ammount=ammount, refrence_number=refrence_number, paymentmode=mode)
             calendar = Calendar.objects.get(id=sss.taskid)
             calendar.completed = 'true'
             calendar.save()
-            url = "/success/" + "Service Payment Updated Successfully You can close this tab"
+            url = "/success/" + "Service Payment Updated Successfully"
             return redirect(url)
         except Services.DoesNotExist:
             url = "/error/" + "Error Updating Payment Service"
