@@ -1,0 +1,96 @@
+{% load static %} {% static "images" as baseUrl %}
+<link
+	rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/css/foundation-float.min.css"
+	crossorigin="anonymous"
+/>
+
+<link
+	rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/css/foundation-prototype.min.css"
+	crossorigin="anonymous"
+/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link
+	rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/css/foundation-rtl.min.css"
+	crossorigin="anonymous"
+/>
+<link
+	rel="shortcut icon"
+	href="{% static 'images/abipravi logo new.ico' %}"
+	type="image/x-icon"
+/>
+<form class="p-3" method="POST">
+	{% csrf_token %}
+	<div
+		style="
+			display: flex;
+			flex-direction: column;
+			padding: 3px;
+			max-width: 300px;
+			max-height: 700px;
+			justify-content: evenly;
+		"
+	>
+		<div style="display: flex; flex-direction: column; gap: 2; margin-top: 5px">
+			<label for="costumer_name">Costumer Name</label>
+			<input
+				type="text"
+				name="costumer_name"
+				id="costumer_name"
+				style="padding: 1px; margin-top: 3px"
+				value="{{costumer.costumer_name}}"
+				placeholder="Costumer Name"
+				required
+			/>
+		</div>
+		<div style="display: flex; flex-direction: column; gap: 2; margin-top: 5px">
+			<label for="gst_number">GST number</label>
+			<input
+				type="text"
+				name="gst_number"
+				value="{{costumer.gst_number}}"
+				id="gst_number"
+				style="padding: 1px; margin-top: 3px"
+				placeholder="GST number"
+			/>
+		</div>
+		<div style="display: flex; flex-direction: column; gap: 2; margin-top: 5px">
+			<label for="address">Address</label>
+			<input
+				type="text"
+				name="address"
+				id="address"
+				value="{{costumer.address}}"
+				style="padding: 1px; margin-top: 3px"
+				placeholder="Address"
+			/>
+		</div>
+		<div style="display: flex; flex-direction: column; gap: 2; margin-top: 5px">
+			<label for="pincode">Pincode</label>
+			<input
+				type="text"
+				name="pincode"
+				id="pincode"
+				value="{{costumer.pincode}}"
+				style="padding: 1px; margin-top: 3px"
+				placeholder="Pincode"
+			/>
+		</div>
+		<div style="display: flex; flex-direction: column; gap: 2; margin-top: 5px">
+			<label for="contact">Contact</label>
+			<input
+				type="text"
+				name="contact"
+				id="contact"
+				value="{{costumer.contact}}"
+				class="form-control"
+				placeholder="Contact Number"
+			/>
+		</div>
+		<button type="submit" class="success button">Save</button>
+		<a class="alert button" onclick="window.location.href='{{back}}'">Back</a>
+	</div>
+</form>

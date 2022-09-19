@@ -637,3 +637,34 @@ def completePaymentService(request, pk):
 
 def custom_error_404(request, exception):
     return render(request, 'errorpages/error500.html', {'title': 'Page Not found'})
+
+def EditCustomer(request, pk):
+    if request.method == 'POST':
+        try:
+            costumer = Costumersmodel.objects.get(id=pk)
+            costumer_name = request.POST['costumer_name']
+            gst_number = request.POST['gst_number']
+            address = request.POST['address']
+            pincode = request.POST['pincode']
+            contact = request.POST['contact']
+            
+            costumer.costumer_name=costumer_name
+            costumer.gst_number=gst_number
+            costumer.address=address
+            costumer.pincode=pincode
+            costumer.contact=contact
+            costumer.save()
+            url = '/costumerdetail/'+pk
+            return redirect(url)
+        except Costumersmodel.DoesNotExist:
+            url = '/error/Data Not Found'
+            return redirect(url)
+    else:
+        costumer = Costumersmodel.objects.get(id=pk)
+        back="/costumerdetail/"+pk
+        return render(request, 'costumerEdit.html', {'back':back, 'costumer':costumer})
+
+def servicePayments(request, pk):
+    services = Services.objects.get(taskid=pk)
+    servicepayments = ServicePayments.objects.filter(service_number=services.service_number)
+    return render(request, 'calendar/paymentshistory.html', {'service':servicepayments, 'data': services})

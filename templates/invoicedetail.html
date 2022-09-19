@@ -36,6 +36,7 @@
 				<td>
 					<a
 						href="/delete/item/{{bill.id}}/{{indata.billnumber}}/"
+						onclick="return confirm('Are you sure, you want to delete it?')"
 						class="btn btn-danger"
 						>X</a
 					>
@@ -72,13 +73,13 @@
 			class="teal-button">Payments</button>
 		<a
 			href="/editinvoice/{{indata.billnumber}}/"
-			class="btn btn-outline-dark" accesskey="p">Edit Invoice</a>
+			class="btn btn-outline-dark" accesskey="p" onclick="return confirm('Are you sure, you want to Edit it?')">Edit Invoice</a>
 
 		{% if balance >= 5 %}
 		<button onclick="window.open('/payments/create/{{indata.billnumber}}/')" class="btn btn-primary">Make Payment</button>
 		{% endif %}
 
-		<a href="/delete/{{indata.billnumber}}" class="btn btn-danger">
+		<a href="/delete/{{indata.billnumber}}" class="btn btn-danger" onclick="return confirm('Are you sure, you want to delete it?')">
 			Delete Invoice
 		</a>
 

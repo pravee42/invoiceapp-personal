@@ -1,0 +1,42 @@
+<link
+	rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css"
+	integrity="sha384-yHIFVG6ClnONEA5yB5DJXfW2/KC173DIQrYoZMEtBvGzmf0PKiGyNEqe9N6BNDBH"
+	crossorigin="anonymous"
+/>
+
+<style>
+	.success {
+		color: white;
+		border-radius: 4px;
+		text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+		background-color: rgb(28, 184, 65);
+	}
+</style>
+{% extends 'base.html' %} {% block content %}
+
+<div class="w-100 d-flex flex-row justify-content-center">
+	<div
+		class="mt-2 p-3 w-50 d-flex flex-row gap-3 justify-content-evenly align-items-center"
+	>
+		<div class="d-flex flex-column align-items-center justify-content-center">
+			<p class="bg-primary text-white rounded p-2 m-4">
+				SER. {{data.service_number}}
+			</p>
+			<div class="d-flex flex-column gap-3">
+				<p class="h6 text-dark">Payments History</p>
+					<table class="table table-bordered">
+						<tbody>
+							{% for x in service %}
+							<tr>
+								<td>{{x.date}}</td>
+								<td>{{x.ammount}}</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

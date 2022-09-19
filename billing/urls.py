@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from . import estimations
 from billingsoftware.settings import DEBUG, STATIC_URL, STATIC_ROOT, MEDIA_URL, MEDIA_ROOT
 from django.conf.urls.static import static
 
@@ -47,7 +48,12 @@ urlpatterns = [
     path('calendar/event/new/',views.CalendarCreateTask),
     path('calendar/event/service/process/<str:pk>/', views.serviceProcess),
     path('complete/service/<str:pk>/', views.completePaymentService),
-    path('error/<str:pk>/', views.ErrorView)
+    path('payments/service/<str:pk>/', views.servicePayments),
+    path('error/<str:pk>/', views.ErrorView),
+    path('customer/edit/<str:pk>/', views.EditCustomer),
+    path('estimations/', estimations.Estimations),
+    path('estimations/<str:pk>/', estimations.CreateEstimations),
+    path('estimations/delete/<str:pk>/', estimations.deleteEstimation),
 #     path('test/', views.WorkTest),
 ]
 

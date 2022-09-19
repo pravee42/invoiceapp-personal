@@ -100,7 +100,7 @@
 						<p class="badge text-white bg-danger">Pending Ammount: {{due}}</p>
 						{% endif %} {% if data.completed == 'true' %}
 						<div class="d-flex flex-row gap-1 w-100">
-							<button class="buttonbtn" onclick="window.location.href='/'">
+							<button class="buttonbtn" onclick="window.location.href='/payments/service/{{data.id}}/'">
 								<i class="bi bi-clock-history"></i> Payments History
 							</button>
 							{% if due > 0 %}

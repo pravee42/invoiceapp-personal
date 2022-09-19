@@ -118,3 +118,10 @@ class ServiceWorks(models.Model):
     service_number = models.CharField(max_length=100)
     service = models.CharField(max_length=100)
     ammount = models.IntegerField(default=0)
+
+class Estimation(models.Model):
+    estimation_number=models.CharField(max_length=100)
+    date=models.CharField(max_length=100, default=datetime.date.today())
+    ammount = models.IntegerField(default=0)
+    costumer_name = models.CharField(max_length=100)
+    contact_number = models.CharField(max_length=100)

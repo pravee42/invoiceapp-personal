@@ -10,7 +10,8 @@
 			<tr class="text-white fs-7">
 				<th>Customer Name</th>
 				<th>Contact</th>
-				<th>Delete</th>
+				<th>Credit Ammount</th>
+				<th>Paid Ammount</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -20,12 +21,8 @@
                     <a href="/costumerdetail/{{item.id}}/">{{item.costumer_name}}</a>
                 </td>
 				<td>{{item.contact}}</td>
-				<td>
-					<button
-						onclick="window.location.href='/costumers/delete/{{item.id}}/'"
-						class="btn btn-danger bi bi-trash2"
-					></button>
-				</td>
+				<td>{{item.credit_ammount}}</td>
+				<td>{{item.paid_ammount}}</td>
 			</tr>
 			{% endfor %}
 		</tbody>

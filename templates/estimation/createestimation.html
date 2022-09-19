@@ -1,0 +1,51 @@
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css"
+    integrity="sha384-yHIFVG6ClnONEA5yB5DJXfW2/KC173DIQrYoZMEtBvGzmf0PKiGyNEqe9N6BNDBH"
+    crossorigin="anonymous"
+/>
+
+{% extends 'base.html' %} {% block content %}
+<div class="d-flex flex-column gap-3 p-3 justify-content-center">
+    <form class="w-50 gap-2 d-flex flex-column pure-form" method="POST">
+        {% csrf_token %}
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td>Customer Name</td>
+                    <td>
+                        <input
+                            type="text"
+                            name="customer_name"
+                            placeholder="Customer Name"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Contact Number</td>
+                    <td>
+                        <input
+                            type="text"
+                            name="contact"
+                            placeholder="Contact Number"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Total Ammount Payable</td>
+                    <td>
+                        {{sum}}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button class="pure-button bg-success text-white">
+                            Generate Estimation
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+{% endblock %}
